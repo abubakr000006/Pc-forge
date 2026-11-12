@@ -1,0 +1,185 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #090b15;
+    color: #f4f5ff;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    padding: 24px 7%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #252941;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.logo span {
+    color: #8c6cff;
+}
+
+.header-label {
+    color: #9299b5;
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+.hero {
+    padding: 75px 8%;
+    background: radial-gradient(ellipse at 80% 30%, #292052, transparent 55%);
+}
+
+.badge {
+    color: #42e3cf;
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 7vw, 65px);
+    margin: 20px 0;
+}
+
+.hero h1 span {
+    color: #9a7aff;
+}
+
+.hero p {
+    color: #a4abc4;
+    max-width: 450px;
+    line-height: 1.7;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 25px;
+    padding: 20px 7%;
+}
+
+.components, .result {
+    background: #141829;
+    border: 1px solid #292f49;
+    border-radius: 18px;
+    padding: 25px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #9299b5;
+    margin-bottom: 25px;
+}
+
+.part {
+    margin-bottom: 18px;
+}
+
+.part label {
+    display: block;
+    margin-bottom: 9px;
+    color: #aeb5ce;
+}
+
+select {
+    width: 100%;
+    padding: 15px;
+    background: #20263b;
+    border: 1px solid #343c59;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+}
+
+.price-label {
+    color: #9299b5;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 25px;
+}
+
+.total {
+    font-size: 36px;
+    font-weight: bold;
+    color: #55e5d0;
+    margin: 10px 0 25px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #292f49;
+    font-size: 13px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(100deg, #8b6aff, #5d8bff);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button.reset {
+    background: #252c43;
+}
+
+.market {
+    margin-top: 30px;
+}
+
+.market h3 {
+    margin-bottom: 15px;
+}
+
+.market div {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    color: #b8bfd5;
+    border-bottom: 1px solid #292f49;
+}
+
+.market span {
+    color: #55e5d0;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 15px;
+    color: #747d9c;
+    font-size: 12px;
+}
+
+@media(max-width: 750px) {
+    .container {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .hero {
+        padding: 55px 25px;
+    }
+
+    .header {
+        padding: 20px;
+    }
+}
