@@ -1,12 +1,9 @@
 <!DOCTYPE html><html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PC Forge — Конфигуратор ПК</title>
-
-<link rel="stylesheet" href="style.css">
-
-<!-- Подключение Three.js -->
-<script type="importmap">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Forge — Конфигуратор ПК</title>
+    <link rel="stylesheet" href="style.css"><script type="importmap">
 {
     "imports": {
         "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
@@ -16,70 +13,54 @@
 </script>
 
 </head><body><header class="header">
-    <div class="logo">PC<span>FORGE</span></div>
-    <div class="header-label">PC CONFIGURATOR</div>
-</header><section class="hero">
-    <div class="badge">СОБЕРИ СВОЙ ПК</div><h1>
-    Твоя идеальная<br>
-    <span>конфигурация</span>
-</h1>
+    <div class="logo">PC <span>FORGE</span></div>
+    <p>Собери компьютер своей мечты</p>
+</header>
 
-<p>
-    Выбирай комплектующие и рассчитывай стоимость своего компьютера.
-</p>
-
-</section><main class="container"><!-- Комплектующие -->
-<section class="components">
-    <h2>Комплектующие</h2>
-
-    <p class="description">
-        Выбери детали для своего будущего ПК
-    </p>
-
-    <div id="parts"></div>
+<section class="hero">
+    <h1>Создай свой идеальный ПК</h1>
+    <p>Выбирай комплектующие, следи за стоимостью и рассматривай сборку в 3D.</p>
 </section>
 
-<!-- 3D-просмотрщик -->
-<section class="viewer">
-    <h2>3D-сборка компьютера</h2>
+<main class="container">
 
-    <p class="description">
-        Рассмотри свой будущий компьютер
-    </p>
+    <section class="components">
+        <h2>Комплектующие</h2>
+        <div id="parts"></div>
+    </section>
 
-    <div id="pc3d"></div>
+    <section class="viewer">
+        <h2>3D-сборка компьютера</h2>
+        <p class="description">Рассмотри свой будущий компьютер</p>
+        <div id="pc3d"></div>
+    </section>
+
+    <section class="result">
+        <h2>Твоя сборка</h2>
+
+        <div class="total">
+            Итого: <span id="total">0 ₽</span>
+        </div>
+
+        <div id="summary"></div>
+
+        <button id="copy">Скопировать сборку</button>
+        <button id="reset">Сбросить сборку</button>
+    </section>
+
+</main>
+
+<section class="market">
+    <h2>Где купить комплектующие?</h2>
+    <p>Подбирай комплектующие и сравнивай цены.</p>
 </section>
 
-<!-- Итоговая сборка -->
-<aside class="result">
-    <h2>Твоя сборка</h2>
+<footer class="footer">
+    <p>© 2026 PC Forge. Конфигуратор компьютеров.</p>
+</footer>
 
-    <div class="price-label">
-        ИТОГОВАЯ СТОИМОСТЬ
-    </div>
+<script src="script.js"></script>
+<script type="module" src="viewer.js"></script>
 
-    <div class="total" id="total">0 ₽</div>
-
-    <div id="summary"></div>
-
-    <button id="copy">
-        Копировать сборку
-    </button>
-
-    <button id="reset" class="reset">
-        Сбросить выбор
-    </button>
-
-    <div class="market">
-        <h3>Цены магазинов</h3>
-
-        <div>Ozon <span>Скоро</span></div>
-        <div>Wildberries <span>Скоро</span></div>
-        <div>Яндекс Маркет <span>Скоро</span></div>
-    </div>
-</aside>
-
-</main><footer>
-    PC FORGE © 2026 — Твой компьютер начинается здесь
-</footer><!-- Основной конфигуратор --><script src="script.js"></script><!-- 3D-просмотрщик --><script type="module" src="viewer.js"></script></body>
+</body>
 </html>
