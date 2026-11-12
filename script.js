@@ -525,3 +525,272 @@ document.getElementById("copy").addEventListener("click", async () => {
 updateMemoryForCPU();
 updateMotherboards();
 calculate();
+/* =====================================
+   PC FORGE — SMART BUILD TOOLS
+===================================== */
+
+(function () {
+    const tools = document.createElement("section");
+    tools.className = "forge-tools";
+
+    tools.innerHTML = `
+        <h2>PC FORGE — SMART TOOLS</h2>
+        <p>Умные инструменты для создания конфигурации ПК.</p>
+
+        <div class="forge-buttons">
+            <button id="preset-budget">Бюджетная сборка</button>
+            <button id="preset-gaming">Игровая сборка</button>
+            <button id="preset-max">Максимальная сборка</button>
+            <button id="random-build">Случайная сборка</button>
+            <button id="save-build">Сохранить сборку</button>
+            <button id="load-build">Загрузить сборку</button>
+        </div>
+
+        <div class="forge-info" id="forge-info">
+            Выбери готовую сборку или создай собственную.
+        </div>
+
+        <div class="forge-status" id="forge-status">
+            Ожидание действий...
+        </div>
+    `;
+
+    document.querySelector(".components").appendChild(tools);
+
+    const info = document.getElementById("forge-info");
+    const status = document.getElementById("forge-status");
+
+    function choose(name, title) {
+        const index = components[name].findIndex(item =>
+            item[0].toLowerCase() === title.toLowerCase()
+        );
+
+        if (index === -1) {
+            console.warn("Комплектующее не найдено:", title);
+            return false;
+        }
+
+        getSelect(name).value = index;
+        return true;
+    }
+
+    function setBuild(build) {
+        choose("Процессор", build.cpu);
+        updateMemoryForCPU();
+
+        choose("Видеокарта", build.gpu);
+        choose("Оперативная память", build.ram);
+
+        updateMotherboards();
+
+        choose("SSD", build.ssd);
+        choose("Корпус", build.case);
+
+        const cpu = getSelected("Процессор");
+        const memory = getSelected("Оперативная память");
+
+        const boards = components["Материнская плата"]
+            .map((item, index) => ({ item, index }))
+            .filter(entry =>
+                entry.item[2] === cpu[2] &&
+                entry.item[3] === memory[2]
+            );
+
+        if (boards.length) {
+            getSelect("Материнская плата").value = boards[0].index;
+        }
+
+        recommendPSU();
+        calculate();
+    }
+
+    const presets = {
+        budget: {
+            cpu: "AMD Ryzen 5 5600",
+            gpu: "RX 6600 Sapphire 8GB",
+            ram: "Kingston Fury Beast 32GB DDR4 3200",
+            ssd: "Kingston NV2 1TB NVMe",
+            case: "DeepCool CC560"
+        },
+
+        gaming: {
+            cpu: "AMD Ryzen 5 7500F",
+            gpu: "RTX 4060 MSI 8GB",
+            ram: "Kingston Fury Beast 32GB DDR5 6000",
+            ssd: "Kingston NV2 1TB NVMe",
+            case: "Montech Air 100 ARGB"
+        },
+
+        maximum: {
+            cpu: "AMD Ryzen 7 9800X3D",
+            gpu: "RTX 5080 ASUS 16GB",
+            ram: "Kingston Fury Beast 64GB DDR5 6000",
+            ssd: "Samsung 990 PRO 2TB NVMe",
+            case: "Lian Li Lancool 216"
+        }
+    };
+
+    function estimatePower() {
+        const gpu = getSelected("Видеокарта")[0].toUpperCase();
+        const cpu = getSelected("Процессор")[0].toUpperCase();
+
+        let gpuPower = 150;
+        let cpuPower = 100;
+
+        if (gpu.includes("5090")) gpuPower = 575;
+        else if (gpu.includes("5080")) gpuPower = 360;
+        else if (gpu.includes("5070 TI")) gpuPower = 300;
+        else if (gpu.includes("5070")) gpuPower = 250;
+        else if (gpu.includes("5060")) gpuPower = 180;
+        else if (gpu.includes("4090")) gpuPower = 450;
+        else if (gpu.includes("4080")) gpuPower = 320;
+        else if (gpu.includes("4070")) gpuPower = 220;
+        else if (gpu.includes("4060")) gpuPower = 120;
+        else if (gpu.includes("3090")) gpuPower = 350;
+        else if (gpu.includes("3080")) gpuPower = 320;
+        else if (gpu.includes("3070")) gpuPower = 220;
+        else if (gpu.includes("3060")) gpuPower = 170;
+        else if (gpu.includes("3050")) gpuPower = 100;
+        else if (gpu.includes("7900 XTX")) gpuPower = 355;
+        else if (gpu.includes("7900 XT")) gpuPower = 315;
+        else if (gpu.includes("7800 XT")) gpuPower = 260;
+        else if (gpu.includes("7700 XT")) gpuPower = 245;
+        else if (gpu.includes("6700 XT")) gpuPower = 230;
+        else if (gpu.includes("6600")) gpuPower = 140;
+
+        if (cpu.includes("I9") || cpu.includes("9950X")) cpuPower = 200;
+        else if (cpu.includes("I7") || cpu.includes("RYZEN 9")) cpuPower = 160;
+        else if (cpu.includes("I5") || cpu.includes("RYZEN 7")) cpuPower = 120;
+
+        return Math.ceil((gpuPower + cpuPower + 100) * 1.3 / 50) * 50;
+    }
+
+    function recommendPSU() {
+        const required = estimatePower();
+
+        const suitable = components["Блок питания"]
+            .map((item, index) => ({ item, index }))
+            .filter(entry => {
+                const match = entry.item[0].match(/(\d{3,4})W/i);
+                return match && Number(match[1]) >= required;
+            })
+            .sort((a, b) => a.item[1] - b.item[1]);
+
+        if (suitable.length) {
+            getSelect("Блок питания").value = suitable[0].index;
+
+            info.innerHTML =
+                `<strong>Рекомендация по питанию:</strong><br>
+                Расчётный ориентир: ${required} Вт.<br>
+                Подходящий вариант: ${suitable[0].item[0]}.
+                <br><small>Это приблизительная оценка, а не гарантия совместимости или качества БП.</small>`;
+        } else {
+            info.textContent =
+                `Для этой конфигурации нужен блок питания мощнее ${required} Вт.`;
+        }
+    }
+
+    function randomItem(name, filter = () => true) {
+        const available = components[name]
+            .map((item, index) => ({ item, index }))
+            .filter(entry => filter(entry.item));
+
+        if (!available.length) return;
+
+        const selected = available[
+            Math.floor(Math.random() * available.length)
+        ];
+
+        getSelect(name).value = selected.index;
+    }
+
+    function randomBuild() {
+        randomItem("Процессор");
+        updateMemoryForCPU();
+
+        randomItem("Видеокарта");
+
+        const cpu = getSelected("Процессор");
+
+        const memoryType = cpu[2] === "AM5" ? "DDR5" : "DDR4";
+
+        randomItem("Оперативная память", item =>
+            item[2] === memoryType
+        );
+
+        updateMotherboards();
+
+        randomItem("Материнская плата");
+        randomItem("SSD");
+        randomItem("Корпус");
+
+        recommendPSU();
+        calculate();
+
+        status.textContent = "Создана случайная конфигурация!";
+    }
+
+    document.getElementById("preset-budget").onclick = () => {
+        setBuild(presets.budget);
+        status.textContent = "Загружена бюджетная сборка.";
+    };
+
+    document.getElementById("preset-gaming").onclick = () => {
+        setBuild(presets.gaming);
+        status.textContent = "Загружена игровая сборка.";
+    };
+
+    document.getElementById("preset-max").onclick = () => {
+        setBuild(presets.maximum);
+        status.textContent = "Загружена максимальная сборка.";
+    };
+
+    document.getElementById("random-build").onclick = randomBuild;
+
+    document.getElementById("save-build").onclick = () => {
+        const saved = {};
+
+        for (const name of Object.keys(components)) {
+            saved[name] = getSelect(name).value;
+        }
+
+        localStorage.setItem("pcforge_saved_build", JSON.stringify(saved));
+
+        status.textContent = "Сборка сохранена на этом устройстве!";
+    };
+
+    document.getElementById("load-build").onclick = () => {
+        const data = localStorage.getItem("pcforge_saved_build");
+
+        if (!data) {
+            status.textContent = "Сохранённая сборка не найдена.";
+            return;
+        }
+
+        const saved = JSON.parse(data);
+
+        for (const name of ["Процессор", "Видеокарта", "Оперативная память", "SSD", "Блок питания", "Корпус"]) {
+            if (saved[name] !== undefined) {
+                getSelect(name).value = saved[name];
+            }
+        }
+
+        updateMemoryForCPU();
+        updateMotherboards();
+
+        if (saved["Материнская плата"] !== undefined) {
+            const board = getSelect("Материнская плата");
+            const savedIndex = Number(saved["Материнская плата"]);
+
+            if ([...board.options].some(option =>
+                Number(option.value) === savedIndex
+            )) {
+                board.value = savedIndex;
+            }
+        }
+
+        calculate();
+        status.textContent = "Сборка загружена!";
+    };
+
+})();
