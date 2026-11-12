@@ -1,4 +1,10 @@
-const components = {
+window.onerror = function(message, source, line, column) {
+    alert(
+        "ОШИБКА PC FORGE:\n" +
+        message +
+        "\nСтрока: " + line
+    );
+};const components = {
     "Процессор": [
         ["Intel Core i5-12400F", 10500, "LGA1700"],
         ["Intel Core i5-13400F", 16500, "LGA1700"],
