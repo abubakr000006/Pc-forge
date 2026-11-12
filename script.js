@@ -179,7 +179,7 @@ const components = {
     ["RTX 5070 Ti Gigabyte 16GB", 150000],
     ["RTX 5070 Ti Palit 16GB", 150000]
 
-],
+
     ],
 
     "Материнская плата": [
