@@ -1,175 +1,243 @@
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x101525);
 
-const container = document.getElementById('pc3d');
+const camera = new THREE.PerspectiveCamera(
+    45,
+    container.clientWidth / container.clientHeight,
+    0.1,
+    100
+);
 
-if (!container) {
-    console.error('Контейнер pc3d не найден');
-} else {
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x101525);
+camera.position.set(5, 3, 7);
 
-    const camera = new THREE.PerspectiveCamera(
-        45,
-        container.clientWidth / container.clientHeight,
-        0.1,
-        100
+const renderer = new THREE.WebGLRenderer({
+    antialias: true
+});
+
+renderer.setSize(container.clientWidth, container.clientHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+
+container.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.target.set(0, 1.7, 0);
+controls.minDistance = 4;
+controls.maxDistance = 12;
+
+// ОСВЕЩЕНИЕ
+
+scene.add(new THREE.AmbientLight(0xffffff, 2));
+
+const mainLight = new THREE.DirectionalLight(0xffffff, 3);
+mainLight.position.set(5, 8, 6);
+scene.add(mainLight);
+
+const rgbLight = new THREE.PointLight(0x823cff, 25, 10);
+rgbLight.position.set(0, 2, 1);
+scene.add(rgbLight);
+
+// МАТЕРИАЛЫ
+
+const black = new THREE.MeshStandardMaterial({
+    color: 0x171b29,
+    metalness: 0.65,
+    roughness: 0.35
+});
+
+const metal = new THREE.MeshStandardMaterial({
+    color: 0x41495c,
+    metalness: 0.85,
+    roughness: 0.25
+});
+
+const boardMaterial = new THREE.MeshStandardMaterial({
+    color: 0x173b35,
+    metalness: 0.3,
+    roughness: 0.7
+});
+
+const rgb = new THREE.MeshStandardMaterial({
+    color: 0x823cff,
+    emissive: 0x5215ff,
+    emissiveIntensity: 2
+});
+
+const glass = new THREE.MeshStandardMaterial({
+    color: 0x6688aa,
+    transparent: true,
+    opacity: 0.12,
+    metalness: 0.4,
+    roughness: 0.1
+});
+
+const pc = new THREE.Group();
+scene.add(pc);
+
+// СОЗДАНИЕ ДЕТАЛЕЙ
+
+function box(w, h, d, x, y, z, material) {
+    const mesh = new THREE.Mesh(
+        new THREE.BoxGeometry(w, h, d),
+        material
     );
 
-    camera.position.set(5, 3, 6);
+    mesh.position.set(x, y, z);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    pc.add(mesh);
 
-    const renderer = new THREE.WebGLRenderer({
-        antialias: true
-    });
+    return mesh;
+}
 
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
+// КОРПУС
 
-    container.appendChild(renderer.domElement);
+// Нижняя и верхняя части
+box(2.8, 0.12, 2.3, 0, 0.1, 0, metal);
+box(2.8, 0.12, 2.3, 0, 3.8, 0, metal);
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.target.set(0, 1.5, 0);
+// Боковые стенки
+box(0.12, 3.8, 2.3, -1.34, 1.95, 0, black);
+box(0.12, 3.8, 2.3, 1.34, 1.95, 0, black);
 
-    scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+// Задняя стенка
+box(2.8, 3.8, 0.12, 0, 1.95, -1.1, black);
 
-    const light = new THREE.DirectionalLight(0xffffff, 3);
-    light.position.set(4, 7, 5);
-    scene.add(light);
+// Прозрачное стекло
+box(2.65, 3.6, 0.025, 0, 1.95, 1.12, glass);
 
-    const pc = new THREE.Group();
-    scene.add(pc);
+// МАТЕРИНСКАЯ ПЛАТА
 
-    const dark = new THREE.MeshStandardMaterial({
-        color: 0x202638,
-        metalness: 0.7,
-        roughness: 0.3
-    });
+box(2.0, 2.7, 0.08, 0, 2, 0.75, boardMaterial);
 
-    const glass = new THREE.MeshStandardMaterial({
-        color: 0x6688aa,
-        transparent: true,
-        opacity: 0.25,
-        metalness: 0.4,
-        roughness: 0.1
-    });
+// ПРОЦЕССОР
 
-    const rgb = new THREE.MeshStandardMaterial({
-        color: 0x823cff,
-        emissive: 0x5215ff,
-        emissiveIntensity: 1.5
-    });
+box(0.65, 0.55, 0.15, -0.35, 2.65, 0.85, metal);
+box(0.4, 0.35, 0.04, -0.35, 2.65, 0.95, rgb);
 
-    function box(w, h, d, x, y, z, material) {
-        const mesh = new THREE.Mesh(
-            new THREE.BoxGeometry(w, h, d),
-            material
-        );
+// ОПЕРАТИВНАЯ ПАМЯТЬ
 
-        mesh.position.set(x, y, z);
-        mesh.castShadow = true;
-        pc.add(mesh);
+for (let i = 0; i < 2; i++) {
+    box(0.13, 1.0, 0.12, 0.35 + i * 0.25, 2.5, 0.85, rgb);
+}
 
-        return mesh;
-    }
+// ВИДЕОКАРТА
 
-    // Корпус
-    box(2.5, 3.8, 2, 0, 1.9, 0, dark);
+box(1.9, 0.4, 0.65, 0.15, 1.45, 0.45, black);
 
-    // Стеклянная боковая панель
-    box(2.42, 3.65, 0.04, 0, 1.9, 1.03, glass);
-
-    // Материнская плата
-    box(1.65, 2.7, 0.08, 0, 2, 0.87, dark);
-
-    // Видеокарта
-    box(1.8, 0.35, 0.65, 0, 1.4, 0.55, dark);
-
-    // RGB-подсветка
-    box(1.5, 0.05, 0.03, 0, 1.4, 0.9, rgb);
-
-    // Оперативная память
-    for (let i = 0; i < 2; i++) {
-        box(0.12, 0.9, 0.15, -0.45 + i * 0.3, 2.5, 0.8, rgb);
-    }
-
-    // Процессор
-    box(0.65, 0.55, 0.45, 0, 2.7, 0.55, dark);
-
-    // Вентиляторы
-    function fan(x, y, z) {
-        const geometry = new THREE.CylinderGeometry(
-            0.38, 0.38, 0.12, 32
-        );
-
-        const mesh = new THREE.Mesh(geometry, rgb);
-        mesh.rotation.x = Math.PI / 2;
-        mesh.position.set(x, y, z);
-        pc.add(mesh);
-    }
-
-    fan(0.7, 0.8, 0.85);
-    fan(0.7, 1.8, 0.85);
-    fan(0.7, 2.8, 0.85);
-
-    // Пол
-    const floor = new THREE.Mesh(
-        new THREE.PlaneGeometry(200, 200),
-        new THREE.MeshStandardMaterial({
-            color: 0x101525
-        })
+// Вентиляторы видеокарты
+function gpuFan(x) {
+    const fan = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.16, 0.16, 0.08, 32),
+        rgb
     );
 
-    floor.rotation.x = -Math.PI / 2;
-    floor.position.y = -0.05;
-    scene.add(floor);
+    fan.rotation.x = Math.PI / 2;
+    fan.position.set(x, 1.45, 0.8);
+    pc.add(fan);
+}
 
-    // Изменение RGB по выбранной видеокарте
-    function updateViewer() {
-        const selects = document.querySelectorAll('#parts select');
+gpuFan(-0.4);
+gpuFan(0.15);
+gpuFan(0.7);
 
-        if (selects.length > 1) {
-            const gpuName =
-                selects[1].selectedOptions[0]?.textContent || '';
+// КУЛЕР ПРОЦЕССОРА
 
-            if (gpuName.includes('RTX')) {
-                rgb.color.set(0x35aaff);
-                rgb.emissive.set(0x176bff);
-            } else if (gpuName.includes('RX')) {
-                rgb.color.set(0xff4b8b);
-                rgb.emissive.set(0xff174f);
-            } else {
-                rgb.color.set(0x823cff);
-                rgb.emissive.set(0x5215ff);
-            }
+box(0.7, 0.65, 0.5, -0.35, 3.1, 0.65, metal);
+
+// КОРПУСНЫЕ ВЕНТИЛЯТОРЫ
+
+function fan(x, y, z) {
+    const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(0.38, 0.045, 12, 40),
+        rgb
+    );
+
+    ring.position.set(x, y, z);
+    pc.add(ring);
+
+    const center = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.1, 0.1, 0.12, 24),
+        metal
+    );
+
+    center.rotation.x = Math.PI / 2;
+    center.position.set(x, y, z);
+    pc.add(center);
+}
+
+fan(-0.85, 0.8, 1.0);
+fan(-0.85, 1.9, 1.0);
+fan(-0.85, 3.0, 1.0);
+
+// ПОЛ
+
+const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(200, 200),
+    new THREE.MeshStandardMaterial({
+        color: 0x101525
+    })
+);
+
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = 0;
+scene.add(floor);
+
+// RGB В ЗАВИСИМОСТИ ОТ ВИДЕОКАРТЫ
+
+function updateViewer() {
+    const selects = document.querySelectorAll('#parts select');
+
+    if (selects.length > 1) {
+        const gpuName =
+            selects[1].selectedOptions[0]?.textContent || '';
+
+        if (gpuName.includes('RTX')) {
+            rgb.color.set(0x35aaff);
+            rgb.emissive.set(0x176bff);
+            rgbLight.color.set(0x35aaff);
+        } else if (gpuName.includes('RX')) {
+            rgb.color.set(0xff4b8b);
+            rgb.emissive.set(0xff174f);
+            rgbLight.color.set(0xff4b8b);
+        } else {
+            rgb.color.set(0x823cff);
+            rgb.emissive.set(0x5215ff);
+            rgbLight.color.set(0x823cff);
         }
     }
+}
 
-    document.getElementById('parts')?.addEventListener(
-        'change',
-        updateViewer
-    );
+document.getElementById('parts')?.addEventListener(
+    'change',
+    updateViewer
+);
 
-    updateViewer();
+updateViewer();
 
-    // Отрисовка
-    function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-    }
+// АНИМАЦИЯ
 
-    animate();
+function animate() {
+    requestAnimationFrame(animate);
 
-    // Изменение размера
-    window.addEventListener('resize', () => {
-        const width = container.clientWidth;
-        const height = container.clientHeight;
+    controls.update();
+    renderer.render(scene, camera);
+}
 
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
+animate();
 
-        renderer.setSize(width, height);
-    });
+// АДАПТАЦИЯ ПОД ЭКРАН
+
+window.addEventListener('resize', () => {
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    if (!width || !height) return;
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(width, height);
+});
 }
