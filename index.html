@@ -1,63 +1,85 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!DOCTYPE html><html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Forge — Конфигуратор ПК</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PC Forge — Конфигуратор ПК</title>
 
-<header class="header">
+<link rel="stylesheet" href="style.css">
+
+<!-- Подключение Three.js -->
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+}
+</script>
+
+</head><body><header class="header">
     <div class="logo">PC<span>FORGE</span></div>
     <div class="header-label">PC CONFIGURATOR</div>
-</header>
+</header><section class="hero">
+    <div class="badge">СОБЕРИ СВОЙ ПК</div><h1>
+    Твоя идеальная<br>
+    <span>конфигурация</span>
+</h1>
 
-<section class="hero">
-    <div class="badge">СОБЕРИ СВОЙ ПК</div>
-    <h1>Твоя идеальная<br><span>конфигурация</span></h1>
-    <p>Выбирай комплектующие и рассчитывай стоимость своего компьютера.</p>
+<p>
+    Выбирай комплектующие и рассчитывай стоимость своего компьютера.
+</p>
+
+</section><main class="container"><!-- Комплектующие -->
+<section class="components">
+    <h2>Комплектующие</h2>
+
+    <p class="description">
+        Выбери детали для своего будущего ПК
+    </p>
+
+    <div id="parts"></div>
 </section>
 
-<main class="container">
+<!-- 3D-просмотрщик -->
+<section class="viewer">
+    <h2>3D-сборка компьютера</h2>
 
-    <section class="components">
-        <h2>Комплектующие</h2>
-        <p class="description">Выбери детали для своего будущего ПК</p>
+    <p class="description">
+        Рассмотри свой будущий компьютер
+    </p>
 
-        <div id="parts"></div>
-    </section>
-        <section class="viewer">
-        <h2>3D-сборка компьютера</h2>
-        <p class="description">Рассмотри свой будущий компьютер</p>
+    <div id="pc3d"></div>
+</section>
 
-        <div id="pc3d"></div>
-        </section>
+<!-- Итоговая сборка -->
+<aside class="result">
+    <h2>Твоя сборка</h2>
 
-    <aside class="result">
-        <h2>Твоя сборка</h2>
+    <div class="price-label">
+        ИТОГОВАЯ СТОИМОСТЬ
+    </div>
 
-        <div class="price-label">ИТОГОВАЯ СТОИМОСТЬ</div>
-        <div class="total" id="total">0 ₽</div>
+    <div class="total" id="total">0 ₽</div>
 
-        <div id="summary"></div>
+    <div id="summary"></div>
 
-        <button id="copy">Копировать сборку</button>
-        <button id="reset" class="reset">Сбросить выбор</button>
+    <button id="copy">
+        Копировать сборку
+    </button>
 
-        <div class="market">
-            <h3>Цены магазинов</h3>
-            <div>Ozon <span>Скоро</span></div>
-            <div>Wildberries <span>Скоро</span></div>
-            <div>Яндекс Маркет <span>Скоро</span></div>
-        </div>
-    </aside>
+    <button id="reset" class="reset">
+        Сбросить выбор
+    </button>
 
-</main>
+    <div class="market">
+        <h3>Цены магазинов</h3>
 
-<footer>PC FORGE © 2026 — Твой компьютер начинается здесь</footer>
+        <div>Ozon <span>Скоро</span></div>
+        <div>Wildberries <span>Скоро</span></div>
+        <div>Яндекс Маркет <span>Скоро</span></div>
+    </div>
+</aside>
 
-<script src="script.js"></script>
-    <script type="module" src="viewer.js"></script>
-</body>
+</main><footer>
+    PC FORGE © 2026 — Твой компьютер начинается здесь
+</footer><!-- Основной конфигуратор --><script src="script.js"></script><!-- 3D-просмотрщик --><script type="module" src="viewer.js"></script></body>
 </html>
