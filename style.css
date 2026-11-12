@@ -1,480 +1,456 @@
 /* =====================================
-   PC FORGE — MAIN DESIGN
+PC FORGE — MAIN DESIGN
 ===================================== */
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  }
 
 html {
-    scroll-behavior: smooth;
+scroll-behavior: smooth;
 }
 
 body {
-    background: #090b15;
-    color: #f4f5ff;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
+background: #090b15;
+color: #f4f5ff;
+font-family: Arial, sans-serif;
+font-size: 14px;
+line-height: 1.5;
 }
 
 /* HEADER */
 
 .header {
-    min-height: 58px;
-    padding: 12px 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #252941;
-    background: #0d1020;
+min-height: 58px;
+padding: 12px 5%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid #252941;
+background: #0d1020;
 }
 
 .logo {
-    font-size: 21px;
-    font-weight: 900;
+font-size: 21px;
+font-weight: 900;
 }
 
 .logo span {
-    color: #8c6cff;
+color: #8c6cff;
 }
 
 .header-label {
-    color: #9299b5;
-    font-size: 11px;
-    letter-spacing: 2px;
+color: #9299b5;
+font-size: 11px;
+letter-spacing: 2px;
 }
 
 /* HERO */
 
 .hero {
-    padding: 28px 6% 24px;
-    background: radial-gradient(
-        ellipse at 80% 30%,
-        #292052,
-        transparent 60%
-    );
+padding: 28px 6% 24px;
+background: radial-gradient(ellipse at 80% 30%, #292052, transparent 60%);
 }
 
 .badge {
-    color: #42e3cf;
-    letter-spacing: 2px;
-    font-size: 11px;
-    font-weight: bold;
+color: #42e3cf;
+letter-spacing: 2px;
+font-size: 11px;
+font-weight: bold;
 }
 
 .hero h1 {
-    font-size: clamp(28px, 4vw, 42px);
-    line-height: 1.15;
-    margin: 10px 0;
+font-size: clamp(28px, 4vw, 42px);
+line-height: 1.15;
+margin: 10px 0;
 }
 
 .hero h1 span {
-    color: #9a7aff;
+color: #9a7aff;
 }
 
 .hero p {
-    color: #a4abc4;
-    max-width: 450px;
-    font-size: 14px;
+color: #a4abc4;
+max-width: 450px;
+font-size: 14px;
 }
 
 /* MAIN CONTAINER */
 
 .container {
-    display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.9fr);
-    gap: 18px;
-    max-width: 1250px;
-    margin: 0 auto;
-    padding: 18px 5%;
-    align-items: start;
+display: grid;
+grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.9fr);
+gap: 18px;
+max-width: 1250px;
+margin: 0 auto;
+padding: 18px 5%;
+align-items: start;
 }
 
 .components,
 .result {
-    background: #141829;
-    border: 1px solid #292f49;
-    border-radius: 14px;
-    padding: 18px;
+background: #141829;
+border: 1px solid #292f49;
+border-radius: 14px;
+padding: 18px;
 }
 
 h2 {
-    font-size: 20px;
-    margin-bottom: 5px;
+font-size: 20px;
+margin-bottom: 5px;
 }
 
 .description {
-    color: #9299b5;
-    font-size: 13px;
-    margin-bottom: 18px;
+color: #9299b5;
+font-size: 13px;
+margin-bottom: 18px;
 }
 
 /* COMPONENTS */
 
 .part {
-    margin-bottom: 12px;
+margin-bottom: 12px;
 }
 
 .part label {
-    display: block;
-    margin-bottom: 5px;
-    color: #bfc5dc;
-    font-size: 13px;
-    font-weight: 600;
+display: block;
+margin-bottom: 5px;
+color: #bfc5dc;
+font-size: 13px;
+font-weight: 600;
 }
 
 select {
-    width: 100%;
-    min-height: 42px;
-    padding: 9px 11px;
-    background: #20263b;
-    border: 1px solid #343c59;
-    border-radius: 8px;
-    color: white;
-    font-size: 13px;
-    outline: none;
+width: 100%;
+min-height: 42px;
+padding: 9px 11px;
+background: #20263b;
+border: 1px solid #343c59;
+border-radius: 8px;
+color: white;
+font-size: 13px;
+outline: none;
 }
 
 select:focus {
-    border-color: #8c6cff;
+border-color: #8c6cff;
 }
 
 /* PRICE */
 
 .price-label {
-    color: #9299b5;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    margin-top: 15px;
+color: #9299b5;
+font-size: 10px;
+letter-spacing: 1.5px;
+margin-top: 15px;
 }
 
 .total {
-    font-size: clamp(25px, 3vw, 32px);
-    font-weight: bold;
-    color: #55e5d0;
-    margin: 5px 0 16px;
-    overflow-wrap: anywhere;
+font-size: clamp(25px, 3vw, 32px);
+font-weight: bold;
+color: #55e5d0;
+margin: 5px 0 16px;
+overflow-wrap: anywhere;
 }
 
 .summary-item {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 9px 0;
-    border-bottom: 1px solid #292f49;
-    font-size: 12px;
+display: flex;
+justify-content: space-between;
+gap: 10px;
+padding: 9px 0;
+border-bottom: 1px solid #292f49;
+font-size: 12px;
 }
 
 /* BUTTONS */
 
 button {
-    width: 100%;
-    min-height: 42px;
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(100deg, #8b6aff, #5d8bff);
-    color: white;
-    font-weight: bold;
-    font-size: 13px;
-    cursor: pointer;
-    transition: 0.2s;
+width: 100%;
+min-height: 42px;
+padding: 10px;
+margin-top: 10px;
+border: none;
+border-radius: 8px;
+background: linear-gradient(100deg, #8b6aff, #5d8bff);
+color: white;
+font-weight: bold;
+font-size: 13px;
+cursor: pointer;
+transition: 0.2s;
 }
 
 button:hover {
-    filter: brightness(1.15);
-    transform: translateY(-1px);
+filter: brightness(1.15);
+transform: translateY(-1px);
 }
 
 button:active {
-    transform: scale(0.98);
+transform: scale(0.98);
 }
 
 button.reset {
-    background: #252c43;
+background: #252c43;
 }
 
 /* MARKET */
 
 .market {
-    margin-top: 20px;
+margin-top: 20px;
 }
 
 .market h3 {
-    font-size: 15px;
-    margin-bottom: 8px;
+font-size: 15px;
+margin-bottom: 8px;
 }
 
 .market div {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 9px 0;
-    color: #b8bfd5;
-    border-bottom: 1px solid #292f49;
-    font-size: 12px;
+display: flex;
+justify-content: space-between;
+gap: 10px;
+padding: 9px 0;
+color: #b8bfd5;
+border-bottom: 1px solid #292f49;
+font-size: 12px;
 }
 
 .market span {
-    color: #55e5d0;
+color: #55e5d0;
 }
 
 /* FOOTER */
 
 footer {
-    text-align: center;
-    padding: 20px 12px;
-    color: #747d9c;
-    font-size: 11px;
+text-align: center;
+padding: 20px 12px;
+color: #747d9c;
+font-size: 11px;
 }
 
 /* =====================================
-   PC FORGE — EXTRA TOOLS
+PC FORGE — EXTRA TOOLS
 ===================================== */
 
 .forge-tools {
-    margin-top: 25px;
-    padding: 22px;
-    border: 1px solid rgba(0, 220, 255, 0.2);
-    border-radius: 18px;
-    background: linear-gradient(145deg, #151d35, #10172b);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+margin-top: 25px;
+padding: 22px;
+border: 1px solid rgba(0, 220, 255, 0.2);
+border-radius: 18px;
+background: linear-gradient(145deg, #151d35, #10172b);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .forge-tools h2 {
-    margin-bottom: 15px;
-    color: #fff;
+margin-bottom: 15px;
+color: #fff;
 }
 
 .forge-tools p {
-    color: #aab6d3;
-    font-size: 14px;
+color: #aab6d3;
+font-size: 14px;
 }
 
 .forge-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 15px;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
+margin-top: 15px;
 }
 
 .forge-tools button {
-    padding: 12px;
-    border: 1px solid rgba(0, 220, 255, 0.25);
-    border-radius: 10px;
-    background: #202d4b;
-    color: #fff;
-    font-size: 14px;
-    cursor: pointer;
-    transition: 0.2s;
+padding: 12px;
+border: 1px solid rgba(0, 220, 255, 0.25);
+border-radius: 10px;
+background: #202d4b;
+color: #fff;
+font-size: 14px;
+cursor: pointer;
+transition: 0.2s;
 }
 
 .forge-tools button:hover {
-    background: #00bcd4;
-    color: #07111f;
-    transform: translateY(-2px);
+background: #00bcd4;
+color: #07111f;
+transform: translateY(-2px);
 }
 
 .forge-tools button:active {
-    transform: scale(0.97);
+transform: scale(0.97);
 }
 
 .forge-info {
-    margin-top: 15px;
-    padding: 14px;
-    border-radius: 10px;
-    background: rgba(0, 220, 255, 0.07);
-    color: #dceaff;
-    line-height: 1.6;
+margin-top: 15px;
+padding: 14px;
+border-radius: 10px;
+background: rgba(0, 220, 255, 0.07);
+color: #dceaff;
+line-height: 1.6;
 }
 
 .forge-info strong {
-    color: #00e5ff;
+color: #00e5ff;
 }
 
 .forge-select {
-    width: 100%;
-    margin-top: 10px;
-    padding: 12px;
-    border: 1px solid #34466b;
-    border-radius: 10px;
-    background: #111a30;
-    color: #fff;
+width: 100%;
+margin-top: 10px;
+padding: 12px;
+border: 1px solid #34466b;
+border-radius: 10px;
+background: #111a30;
+color: #fff;
 }
 
 .forge-status {
-    margin-top: 12px;
-    padding: 12px;
-    border-radius: 10px;
-    font-size: 14px;
-    background: #192b3b;
-    color: #7eeaff;
+margin-top: 12px;
+padding: 12px;
+border-radius: 10px;
+font-size: 14px;
+background: #192b3b;
+color: #7eeaff;
 }
 
 /* =====================================
-   TABLETS
+3D PC BUILDER
 ===================================== */
-
-@media (max-width: 850px) {
-    .container {
-        grid-template-columns: 1fr;
-        max-width: 650px;
-    }
-
-    .components {
-        order: 1;
-    }
-
-    .result {
-        order: 2;
-    }
-}
-
-/* =====================================
-   PHONES
-===================================== */
-
-@media (max-width: 600px) {
-    .forge-tools {
-        padding: 16px;
-    }
-
-    .forge-buttons {
-        grid-template-columns: 1fr;
-    }
-
-    .forge-tools button {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        font-size: 13px;
-    }
-
-    .header {
-        padding: 10px 16px;
-        min-height: 52px;
-    }
-
-    .logo {
-        font-size: 19px;
-    }
-
-    .header-label {
-        font-size: 9px;
-        letter-spacing: 1px;
-    }
-
-    .hero {
-        padding: 22px 18px 18px;
-    }
-
-    .hero h1 {
-        font-size: 29px;
-        margin: 8px 0;
-    }
-
-    .hero p {
-        font-size: 13px;
-    }
-
-    .container {
-        padding: 12px;
-        gap: 12px;
-    }
-
-    .components,
-    .result {
-        padding: 14px;
-        border-radius: 11px;
-    }
-
-    h2 {
-        font-size: 18px;
-    }
-
-    select {
-       /* 3D BUILDER */
-
-.container {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: start;
-}
-
-.components {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.result {
-    grid-column: 2;
-    grid-row: 1;
-}
 
 .viewer {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    background: #111a2e;
-    border: 1px solid rgba(130, 60, 255, 0.3);
-    border-radius: 18px;
-    padding: 24px;
-    min-width: 0;
-    margin-top: 20px;
+grid-column: 1 / -1;
+background: #141829;
+border: 1px solid rgba(130, 60, 255, 0.3);
+border-radius: 18px;
+padding: 24px;
+min-width: 0;
+margin-top: 5px;
 }
 
 #pc3d {
-    width: 100%;
-    height: 450px;
-    overflow: hidden;
-    border-radius: 14px;
-    background: #101525;
+width: 100%;
+height: 450px;
+overflow: hidden;
+border-radius: 14px;
+background: #101525;
+border: 1px solid #292f49;
 }
 
 #pc3d canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
+display: block;
+width: 100%;
+height: 100%;
 }
+
+/* =====================================
+TABLETS
+===================================== */
 
 @media (max-width: 850px) {
-    .container {
-        grid-template-columns: 1fr;
-    }
-
-    .components,
-    .result,
-    .viewer {
-        grid-column: 1;
-        grid-row: auto;
-    }
-
-    .components {
-        order: 1;
-    }
-
-    .result {
-        order: 2;
-    }
-
-    .viewer {
-        order: 3;
-    }
-
-    #pc3d {
-        height: 350px;
-    }
+.container {
+grid-template-columns: 1fr;
+max-width: 650px;
 }
-        min-height: 40px;
-        font-size: 12px;
-    }
 
-    .total {
-        font-size: 27px;
-    }
+.components {
+    order: 1;
+}
+
+.result {
+    order: 2;
+}
+
+.viewer {
+    order: 3;
+    grid-column: 1;
+}
+
+#pc3d {
+    height: 350px;
+}
+
+}
+
+/* =====================================
+PHONES
+===================================== */
+
+@media (max-width: 600px) {
+.forge-tools {
+padding: 16px;
+}
+
+.forge-buttons {
+    grid-template-columns: 1fr;
+}
+
+.forge-tools button {
+    width: 100%;
+}
+
+}
+
+/* =====================================
+SMALL PHONES
+===================================== */
+
+@media (max-width: 480px) {
+body {
+font-size: 13px;
+}
+
+.header {
+    padding: 10px 16px;
+    min-height: 52px;
+}
+
+.logo {
+    font-size: 19px;
+}
+
+.header-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.hero {
+    padding: 22px 18px 18px;
+}
+
+.hero h1 {
+    font-size: 29px;
+    margin: 8px 0;
+}
+
+.hero p {
+    font-size: 13px;
+}
+
+.container {
+    padding: 12px;
+    gap: 12px;
+}
+
+.components,
+.result,
+.viewer {
+    padding: 14px;
+    border-radius: 11px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+select {
+    min-height: 40px;
+    font-size: 12px;
+}
+
+.total {
+    font-size: 27px;
+}
+
+#pc3d {
+    height: 300px;
+}
+
 }
