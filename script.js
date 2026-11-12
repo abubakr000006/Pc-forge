@@ -7,10 +7,179 @@ const components = {
     ],
 
     "Видеокарта": [
-        ["RTX 3050 8GB", 19000],
-        ["RTX 3060 12GB", 25000],
-        ["RTX 4060 8GB", 30000],
-        ["RTX 5060 8GB", 35000]
+
+    // GTX 16
+    ["GTX 1660 SUPER MSI 6GB", 25000],
+    ["GTX 1660 SUPER ASUS 6GB", 25000],
+    ["GTX 1660 SUPER Gigabyte 6GB", 25000],
+    ["GTX 1660 SUPER Palit 6GB", 25000],
+
+    ["GTX 1660 Ti MSI 6GB", 24000],
+    ["GTX 1660 Ti ASUS 6GB", 24000],
+    ["GTX 1660 Ti Gigabyte 6GB", 24000],
+    ["GTX 1660 Ti Palit 6GB", 24000],
+
+    // RTX 20
+    ["RTX 2060 MSI 6GB", 30000],
+    ["RTX 2060 ASUS 6GB", 30000],
+    ["RTX 2060 Gigabyte 6GB", 30000],
+    ["RTX 2060 Palit 6GB", 30000],
+    ["RTX 2060 Zotac 6GB", 30000],
+
+    ["RTX 2060 SUPER MSI 8GB", 29000],
+    ["RTX 2060 SUPER ASUS 8GB", 29000],
+    ["RTX 2060 SUPER Gigabyte 8GB", 29000],
+    ["RTX 2060 SUPER Palit 8GB", 29000],
+
+    ["RTX 2070 MSI 8GB", 39500],
+    ["RTX 2070 ASUS 8GB", 39500],
+    ["RTX 2070 Gigabyte 8GB", 39500],
+    ["RTX 2070 Palit 8GB", 39500],
+
+    ["RTX 2070 SUPER MSI 8GB", 31000],
+    ["RTX 2070 SUPER ASUS 8GB", 31000],
+    ["RTX 2070 SUPER Gigabyte 8GB", 31000],
+    ["RTX 2070 SUPER Palit 8GB", 31000],
+
+    ["RTX 2080 MSI 8GB", 40000],
+    ["RTX 2080 ASUS 8GB", 40000],
+    ["RTX 2080 Gigabyte 8GB", 40000],
+    ["RTX 2080 Palit 8GB", 40000],
+
+    ["RTX 2080 SUPER MSI 8GB", 43000],
+    ["RTX 2080 SUPER ASUS 8GB", 43000],
+    ["RTX 2080 SUPER Gigabyte 8GB", 43000],
+    ["RTX 2080 SUPER Palit 8GB", 43000],
+
+    ["RTX 2080 Ti MSI 11GB", 47000],
+    ["RTX 2080 Ti ASUS 11GB", 47000],
+    ["RTX 2080 Ti Gigabyte 11GB", 47000],
+    ["RTX 2080 Ti Palit 11GB", 47000],
+
+    // RTX 30
+    ["RTX 3050 MSI 8GB", 19000],
+    ["RTX 3050 ASUS 8GB", 19000],
+    ["RTX 3050 Gigabyte 8GB", 19000],
+    ["RTX 3050 Palit 8GB", 19000],
+
+    ["RTX 3060 MSI 12GB", 45000],
+    ["RTX 3060 ASUS 12GB", 45000],
+    ["RTX 3060 Gigabyte 12GB", 45000],
+    ["RTX 3060 Palit 12GB", 45000],
+    ["RTX 3060 Zotac 12GB", 45000],
+
+    ["RTX 3060 Ti MSI 8GB", 42000],
+    ["RTX 3060 Ti ASUS 8GB", 42000],
+    ["RTX 3060 Ti Gigabyte 8GB", 42000],
+    ["RTX 3060 Ti Palit 8GB", 42000],
+
+    ["RTX 3070 MSI 8GB", 45000],
+    ["RTX 3070 ASUS 8GB", 45000],
+    ["RTX 3070 Gigabyte 8GB", 45000],
+    ["RTX 3070 Palit 8GB", 45000],
+
+    ["RTX 3070 Ti MSI 8GB", 48000],
+    ["RTX 3070 Ti ASUS 8GB", 48000],
+    ["RTX 3070 Ti Gigabyte 8GB", 48000],
+    ["RTX 3070 Ti Palit 8GB", 48000],
+
+    ["RTX 3080 MSI 10GB", 60000],
+    ["RTX 3080 ASUS 10GB", 60000],
+    ["RTX 3080 Gigabyte 10GB", 60000],
+    ["RTX 3080 Palit 10GB", 60000],
+
+    ["RTX 3080 Ti MSI 12GB", 65000],
+    ["RTX 3080 Ti ASUS 12GB", 65000],
+    ["RTX 3080 Ti Gigabyte 12GB", 65000],
+    ["RTX 3080 Ti Palit 12GB", 65000],
+
+    ["RTX 3090 MSI 24GB", 85000],
+    ["RTX 3090 ASUS 24GB", 85000],
+    ["RTX 3090 Gigabyte 24GB", 85000],
+    ["RTX 3090 Palit 24GB", 85000],
+
+    ["RTX 3090 Ti MSI 24GB", 100000],
+    ["RTX 3090 Ti ASUS 24GB", 100000],
+    ["RTX 3090 Ti Gigabyte 24GB", 100000],
+
+    // RTX 40
+    ["RTX 4060 MSI 8GB", 30000],
+    ["RTX 4060 ASUS 8GB", 30000],
+    ["RTX 4060 Gigabyte 8GB", 30000],
+    ["RTX 4060 Palit 8GB", 30000],
+
+    ["RTX 4060 Ti MSI 8GB", 38000],
+    ["RTX 4060 Ti ASUS 8GB", 38000],
+    ["RTX 4060 Ti Gigabyte 8GB", 38000],
+    ["RTX 4060 Ti Palit 8GB", 38000],
+
+    ["RTX 4070 MSI 12GB", 55000],
+    ["RTX 4070 ASUS 12GB", 55000],
+    ["RTX 4070 Gigabyte 12GB", 55000],
+    ["RTX 4070 Palit 12GB", 55000],
+
+    ["RTX 4070 SUPER MSI 12GB", 65000],
+    ["RTX 4070 SUPER ASUS 12GB", 65000],
+    ["RTX 4070 SUPER Gigabyte 12GB", 65000],
+    ["RTX 4070 SUPER Palit 12GB", 65000],
+
+    ["RTX 4070 Ti MSI 12GB", 75000],
+    ["RTX 4070 Ti ASUS 12GB", 75000],
+    ["RTX 4070 Ti Gigabyte 12GB", 75000],
+    ["RTX 4070 Ti Palit 12GB", 75000],
+
+    ["RTX 4070 Ti SUPER MSI 16GB", 85000],
+    ["RTX 4070 Ti SUPER ASUS 16GB", 85000],
+    ["RTX 4070 Ti SUPER Gigabyte 16GB", 85000],
+    ["RTX 4070 Ti SUPER Palit 16GB", 85000],
+
+    ["RTX 4080 MSI 16GB", 100000],
+    ["RTX 4080 ASUS 16GB", 100000],
+    ["RTX 4080 Gigabyte 16GB", 100000],
+    ["RTX 4080 Palit 16GB", 100000],
+
+    ["RTX 4080 SUPER MSI 16GB", 110000],
+    ["RTX 4080 SUPER ASUS 16GB", 110000],
+    ["RTX 4080 SUPER Gigabyte 16GB", 110000],
+    ["RTX 4080 SUPER Palit 16GB", 110000],
+
+    ["RTX 4090 MSI 24GB", 180000],
+    ["RTX 4090 ASUS 24GB", 180000],
+    ["RTX 4090 Gigabyte 24GB", 180000],
+    ["RTX 4090 Palit 24GB", 180000],
+
+    // RTX 50
+    ["RTX 5050 MSI 8GB", 45000],
+    ["RTX 5050 ASUS 8GB", 45000],
+    ["RTX 5050 Gigabyte 8GB", 45000],
+    ["RTX 5050 Palit 8GB", 45000],
+
+    ["RTX 5060 MSI 8GB", 54000],
+    ["RTX 5060 ASUS 8GB", 54000],
+    ["RTX 5060 Gigabyte 8GB", 54000],
+    ["RTX 5060 Palit 8GB", 54000],
+
+    ["RTX 5060 Ti MSI 8GB", 60000],
+    ["RTX 5060 Ti ASUS 8GB", 60000],
+    ["RTX 5060 Ti Gigabyte 8GB", 60000],
+    ["RTX 5060 Ti Palit 8GB", 60000],
+
+    ["RTX 5060 Ti MSI 16GB", 90000],
+    ["RTX 5060 Ti ASUS 16GB", 90000],
+    ["RTX 5060 Ti Gigabyte 16GB", 90000],
+    ["RTX 5060 Ti Palit 16GB", 90000],
+
+    ["RTX 5070 MSI 12GB", 105000],
+    ["RTX 5070 ASUS 12GB", 105000],
+    ["RTX 5070 Gigabyte 12GB", 105000],
+    ["RTX 5070 Palit 12GB", 105000],
+
+    ["RTX 5070 Ti MSI 16GB", 150000],
+    ["RTX 5070 Ti ASUS 16GB", 150000],
+    ["RTX 5070 Ti Gigabyte 16GB", 150000],
+    ["RTX 5070 Ti Palit 16GB", 150000]
+
+],
     ],
 
     "Материнская плата": [
