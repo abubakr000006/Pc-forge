@@ -371,3 +371,4 @@ document.getElementById("copy").addEventListener("click", async () => {
 
 updateMotherboards();
 calculate();
+        
