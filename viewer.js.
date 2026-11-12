@@ -1,9 +1,11 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const container = document.getElementById('pc3d');
 
-if (container) {
+if (!container) {
+    console.error('Контейнер pc3d не найден');
+} else {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x101525);
 
@@ -16,7 +18,10 @@ if (container) {
 
     camera.position.set(5, 3, 6);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+        antialias: true
+    });
+
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
@@ -25,7 +30,7 @@ if (container) {
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.target.set(0, 1.4, 0);
+    controls.target.set(0, 1.5, 0);
 
     scene.add(new THREE.AmbientLight(0xffffff, 1.5));
 
@@ -33,28 +38,24 @@ if (container) {
     light.position.set(4, 7, 5);
     scene.add(light);
 
-    const rgbLight = new THREE.PointLight(0x713cff, 15, 8);
-    rgbLight.position.set(0, 2, 1);
-    scene.add(rgbLight);
-
     const pc = new THREE.Group();
     scene.add(pc);
 
     const dark = new THREE.MeshStandardMaterial({
-        color: 0x171c2b,
+        color: 0x202638,
         metalness: 0.7,
         roughness: 0.3
     });
 
     const glass = new THREE.MeshStandardMaterial({
-        color: 0x334466,
+        color: 0x6688aa,
         transparent: true,
-        opacity: 0.22,
+        opacity: 0.25,
         metalness: 0.4,
         roughness: 0.1
     });
 
-    const purple = new THREE.MeshStandardMaterial({
+    const rgb = new THREE.MeshStandardMaterial({
         color: 0x823cff,
         emissive: 0x5215ff,
         emissiveIntensity: 1.5
@@ -85,27 +86,24 @@ if (container) {
     // Видеокарта
     box(1.8, 0.35, 0.65, 0, 1.4, 0.55, dark);
 
-    // Подсветка видеокарты
-    box(1.5, 0.05, 0.03, 0, 1.4, 0.9, purple);
+    // RGB-подсветка
+    box(1.5, 0.05, 0.03, 0, 1.4, 0.9, rgb);
 
     // Оперативная память
     for (let i = 0; i < 2; i++) {
-        box(0.12, 0.9, 0.15, -0.45 + i * 0.3, 2.5, 0.8, purple);
+        box(0.12, 0.9, 0.15, -0.45 + i * 0.3, 2.5, 0.8, rgb);
     }
 
-    // Кулер процессора
+    // Процессор
     box(0.65, 0.55, 0.45, 0, 2.7, 0.55, dark);
 
     // Вентиляторы
-    function fan(x, y, z, radius = 0.38) {
+    function fan(x, y, z) {
         const geometry = new THREE.CylinderGeometry(
-            radius,
-            radius,
-            0.12,
-            32
+            0.38, 0.38, 0.12, 32
         );
 
-        const mesh = new THREE.Mesh(geometry, purple);
+        const mesh = new THREE.Mesh(geometry, rgb);
         mesh.rotation.x = Math.PI / 2;
         mesh.position.set(x, y, z);
         pc.add(mesh);
@@ -118,37 +116,44 @@ if (container) {
     // Пол
     const floor = new THREE.Mesh(
         new THREE.PlaneGeometry(200, 200),
-        new THREE.MeshStandardMaterial({ color: 0x101525 })
+        new THREE.MeshStandardMaterial({
+            color: 0x101525
+        })
     );
 
     floor.rotation.x = -Math.PI / 2;
     floor.position.y = -0.05;
     scene.add(floor);
 
-    // Изменение подсветки
+    // Изменение RGB по выбранной видеокарте
     function updateViewer() {
         const selects = document.querySelectorAll('#parts select');
 
         if (selects.length > 1) {
-            const gpuName = selects[1].selectedOptions[0]?.textContent || '';
+            const gpuName =
+                selects[1].selectedOptions[0]?.textContent || '';
 
             if (gpuName.includes('RTX')) {
-                purple.color.set(0x35aaff);
-                purple.emissive.set(0x176bff);
+                rgb.color.set(0x35aaff);
+                rgb.emissive.set(0x176bff);
             } else if (gpuName.includes('RX')) {
-                purple.color.set(0xff4b8b);
-                purple.emissive.set(0xff174f);
+                rgb.color.set(0xff4b8b);
+                rgb.emissive.set(0xff174f);
             } else {
-                purple.color.set(0x823cff);
-                purple.emissive.set(0x5215ff);
+                rgb.color.set(0x823cff);
+                rgb.emissive.set(0x5215ff);
             }
         }
     }
 
-    document.getElementById('parts')?.addEventListener('change', updateViewer);
+    document.getElementById('parts')?.addEventListener(
+        'change',
+        updateViewer
+    );
 
     updateViewer();
 
+    // Отрисовка
     function animate() {
         requestAnimationFrame(animate);
         controls.update();
@@ -157,9 +162,14 @@ if (container) {
 
     animate();
 
+    // Изменение размера
     window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        camera.aspect = width / height;
         camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
+
+        renderer.setSize(width, height);
     });
 }
