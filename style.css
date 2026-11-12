@@ -1,6 +1,6 @@
-/* ================================
-   PC FORGE — ОСНОВНОЙ ДИЗАЙН
-================================ */
+/* =====================================
+   PC FORGE — MAIN DESIGN
+===================================== */
 
 * {
     box-sizing: border-box;
@@ -81,7 +81,7 @@ body {
     font-size: 14px;
 }
 
-/* ОСНОВНОЙ КОНТЕЙНЕР */
+/* MAIN CONTAINER */
 
 .container {
     display: grid;
@@ -112,7 +112,7 @@ h2 {
     margin-bottom: 18px;
 }
 
-/* КОМПЛЕКТУЮЩИЕ */
+/* COMPONENTS */
 
 .part {
     margin-bottom: 12px;
@@ -142,7 +142,7 @@ select:focus {
     border-color: #8c6cff;
 }
 
-/* ЦЕНА */
+/* PRICE */
 
 .price-label {
     color: #9299b5;
@@ -168,7 +168,7 @@ select:focus {
     font-size: 12px;
 }
 
-/* КНОПКИ */
+/* BUTTONS */
 
 button {
     width: 100%;
@@ -198,7 +198,7 @@ button.reset {
     background: #252c43;
 }
 
-/* МАГАЗИНЫ */
+/* MARKET */
 
 .market {
     margin-top: 20px;
@@ -232,9 +232,9 @@ footer {
     font-size: 11px;
 }
 
-/* ================================
-   PC FORGE — ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ
-================================ */
+/* =====================================
+   PC FORGE — EXTRA TOOLS
+===================================== */
 
 .forge-tools {
     margin-top: 25px;
@@ -257,4 +257,154 @@ footer {
 
 .forge-buttons {
     display: grid;
-   
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.forge-tools button {
+    padding: 12px;
+    border: 1px solid rgba(0, 220, 255, 0.25);
+    border-radius: 10px;
+    background: #202d4b;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.forge-tools button:hover {
+    background: #00bcd4;
+    color: #07111f;
+    transform: translateY(-2px);
+}
+
+.forge-tools button:active {
+    transform: scale(0.97);
+}
+
+.forge-info {
+    margin-top: 15px;
+    padding: 14px;
+    border-radius: 10px;
+    background: rgba(0, 220, 255, 0.07);
+    color: #dceaff;
+    line-height: 1.6;
+}
+
+.forge-info strong {
+    color: #00e5ff;
+}
+
+.forge-select {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: 1px solid #34466b;
+    border-radius: 10px;
+    background: #111a30;
+    color: #fff;
+}
+
+.forge-status {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    background: #192b3b;
+    color: #7eeaff;
+}
+
+/* =====================================
+   TABLETS
+===================================== */
+
+@media (max-width: 850px) {
+    .container {
+        grid-template-columns: 1fr;
+        max-width: 650px;
+    }
+
+    .components {
+        order: 1;
+    }
+
+    .result {
+        order: 2;
+    }
+}
+
+/* =====================================
+   PHONES
+===================================== */
+
+@media (max-width: 600px) {
+    .forge-tools {
+        padding: 16px;
+    }
+
+    .forge-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .forge-tools button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 13px;
+    }
+
+    .header {
+        padding: 10px 16px;
+        min-height: 52px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .header-label {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .hero {
+        padding: 22px 18px 18px;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+        margin: 8px 0;
+    }
+
+    .hero p {
+        font-size: 13px;
+    }
+
+    .container {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .components,
+    .result {
+        padding: 14px;
+        border-radius: 11px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    select {
+        min-height: 40px;
+        font-size: 12px;
+    }
+
+    .total {
+        font-size: 27px;
+    }
+       }
