@@ -1,190 +1,126 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-// Контейнер 3D-модели
 const container = document.getElementById('pc3d');
 
 if (!container) {
-    throw new Error('Не найден элемент #pc3d в index.html');
-}
+    console.error('Не найден элемент #pc3d');
+} else {
 
-// Сцена
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x101525);
+    // СЦЕНА
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x101525);
 
-// Камера
-const camera = new THREE.PerspectiveCamera(
-    45,
-    container.clientWidth / container.clientHeight,
-    0.1,
-    100
-);
-
-camera.position.set(5, 4, 7);
-
-// Рендерер
-const renderer = new THREE.WebGLRenderer({
-    antialias: true
-});
-
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setSize(container.clientWidth, container.clientHeight);
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-container.appendChild(renderer.domElement);
-
-// Управление вращением
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.05;
-controls.target.set(0, 1.7, 0);
-
-// Освещение
-scene.add(new THREE.AmbientLight(0xffffff, 1.5));
-
-const light = new THREE.DirectionalLight(0xffffff, 2);
-light.position.set(5, 8, 6);
-scene.add(light);
-
-// Материалы
-const metal = new THREE.MeshStandardMaterial({
-    color: 0x303747,
-    metalness: 0.8,
-    roughness: 0.3
-});
-
-const black = new THREE.MeshStandardMaterial({
-    color: 0x111722,
-    metalness: 0.4,
-    roughness: 0.5
-});
-
-const motherboardMaterial = new THREE.MeshStandardMaterial({
-    color: 0x173b35,
-    metalness: 0.2,
-    roughness: 0.7
-});
-
-const silver = new THREE.MeshStandardMaterial({
-    color: 0x8995a5,
-    metalness: 0.8,
-    roughness: 0.25
-});
-
-const glass = new THREE.MeshPhysicalMaterial({
-    color: 0x8eb5ff,
-    transparent: true,
-    opacity: 0.12,
-    roughness: 0.1,
-    metalness: 0.1,
-    side: THREE.DoubleSide
-});
-
-// Вспомогательная функция для создания деталей
-function box(width, height, depth, x, y, z, material) {
-    const geometry = new THREE.BoxGeometry(width, height, depth);
-    const mesh = new THREE.Mesh(geometry, material);
-
-    mesh.position.set(x, y, z);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-
-    scene.add(mesh);
-    return mesh;
-}
-
-// Создаём корпус
-const pc = new THREE.Group();
-scene.add(pc);
-
-function pcBox(width, height, depth, x, y, z, material) {
-    const geometry = new THREE.BoxGeometry(width, height, depth);
-    const mesh = new THREE.Mesh(geometry, material);
-
-    mesh.position.set(x, y, z);
-    mesh.castShadow = true;
-
-    pc.add(mesh);
-    return mesh;
-}
-
-// Основание и верх корпуса
-pcBox(2.8, 0.12, 2.3, 0, 0.1, 0, metal);
-pcBox(2.8, 0.12, 2.3, 0, 3.8, 0, metal);
-
-// Боковые стенки и задняя панель
-pcBox(0.12, 3.8, 2.3, -1.34, 1.95, 0, black);
-pcBox(2.8, 3.8, 0.12, 0, 1.95, -1.1, black);
-
-// Передняя рамка
-pcBox(0.12, 3.8, 2.3, 1.34, 1.95, 0, metal);
-
-// Стеклянная боковая панель
-const glassPanel = new THREE.Mesh(
-    new THREE.BoxGeometry(2.55, 3.5, 0.025),
-    glass
-);
-
-glassPanel.position.set(0, 1.95, 1.16);
-pc.add(glassPanel);
-
-// Материнская плата
-pcBox(
-    1.7, 2.4, 0.08,
-    -0.35, 2.1, -0.85,
-    motherboardMaterial
-);
-
-// Процессор
-pcBox(
-    0.55, 0.12, 0.55,
-    -0.35, 2.8, -0.55,
-    silver
-);
-
-// Кулер процессора
-pcBox(
-    0.75, 0.35, 0.75,
-    -0.35, 3.05, -0.55,
-    metal
-);
-
-// Вентилятор кулера
-function fan(x, y, z, color, parent = pc) {
-    const group = new THREE.Group();
-    group.position.set(x, y, z);
-
-    const ringGeometry = new THREE.TorusGeometry(
-        0.38, 0.045, 12, 40
+    // КАМЕРА
+    const camera = new THREE.PerspectiveCamera(
+        45,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        100
     );
 
-    const ringMaterial = new THREE.MeshStandardMaterial({
-        color,
-        emissive: color,
-        emissiveIntensity: 1.5
+    camera.position.set(5, 4, 7);
+
+    // РЕНДЕРЕР
+    const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: false
     });
 
-    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-    group.add(ring);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-    const center = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.12, 0.12, 0.12, 24),
-        black
-    );
+    container.appendChild(renderer.domElement);
 
-    center.rotation.x = Math.PI / 2;
-    group.add(center);
+    // УПРАВЛЕНИЕ
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.target.set(0, 1.8, 0);
+    controls.minDistance = 4;
+    controls.maxDistance = 12;
 
-    parent.add(group);
-    return group;
-}
+    // СВЕТ
+    scene.add(new THREE.AmbientLight(0xffffff, 1.8));
 
-fan(-0.35, 3.1, 0.0, 0x00aaff);
+    const mainLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    mainLight.position.set(5, 8, 6);
+    scene.add(mainLight);
 
-// Оперативная память
-for (let i = 0; i < 2; i++) {
-    pcBox(
-        0.12, 0.8, 0.18,
-        0.25 + i * 0.3, 2.75,
+    const purpleLight = new THREE.PointLight(0x7733ff, 35, 10);
+    purpleLight.position.set(-3, 3, 2);
+    scene.add(purpleLight);
+
+    const blueLight = new THREE.PointLight(0x0088ff, 25, 10);
+    blueLight.position.set(3, 2, 3);
+    scene.add(blueLight);
+
+    // МАТЕРИАЛЫ
+    const materials = {
+        metal: new THREE.MeshStandardMaterial({
+            color: 0x303747,
+            metalness: 0.8,
+            roughness: 0.3
+        }),
+
+        black: new THREE.MeshStandardMaterial({
+            color: 0x10151e,
+            metalness: 0.4,
+            roughness: 0.45
+        }),
+
+        board: new THREE.MeshStandardMaterial({
+            color: 0x164638,
+            metalness: 0.2,
+            roughness: 0.65
+        }),
+
+        silver: new THREE.MeshStandardMaterial({
+            color: 0x9aa5b5,
+            metalness: 0.8,
+            roughness: 0.25
+        }),
+
+        glass: new THREE.MeshPhysicalMaterial({
+            color: 0x9bbcff,
+            transparent: true,
+            opacity: 0.10,
+            roughness: 0.12,
+            metalness: 0.1,
+            side: THREE.DoubleSide,
+            depthWrite: false
+        })
+    };
+
+    // ГРУППА КОМПЬЮТЕРА
+    const pc = new THREE.Group();
+    scene.add(pc);
+
+    // СОЗДАНИЕ КОРОБОК
+    function box(width, height, depth, x, y, z, material) {
+        const geometry = new THREE.BoxGeometry(
+            width,
+            height,
+            depth
+        );
+
+        const mesh = new THREE.Mesh(geometry, material);
+
+        mesh.position.set(x, y, z);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+
+        pc.add(mesh);
+
+        return mesh;
+    }
+
+    // RGB МАТЕРИАЛ
+    function rgbMaterial(color) {
+        return new THREE.MeshStandardMaterial({
+            color: color,
+            emissive: color,
+            emissiveIntensity: 1.5
+        });
+   
