@@ -140,3 +140,68 @@
 
 </body>
 </html>
+/* PC FORGE — LAYOUT FIX */
+
+.container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+    align-items: start;
+    gap: 25px;
+    width: min(1400px, 94%);
+    margin: 50px auto;
+}
+
+.components {
+    grid-column: 1;
+    min-width: 0;
+    width: 100%;
+}
+
+.viewer {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    min-width: 0;
+    width: 100%;
+}
+
+.result {
+    grid-column: 2;
+    grid-row: 2;
+    position: relative;
+    min-width: 0;
+    width: 100%;
+    height: fit-content;
+    margin-top: 0;
+}
+
+#parts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+#parts .part {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+.product-grid {
+    width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .components,
+    .viewer,
+    .result {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
