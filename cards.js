@@ -1,5 +1,5 @@
 /* =====================================
-   PC FORGE — PRODUCT CARDS
+   PC FORGE — PRODUCT CARDS FIXED
 ===================================== */
 
 (() => {
@@ -8,7 +8,7 @@
     const parts = document.getElementById("parts");
 
     if (!parts) {
-        console.error("PC FORGE: элемент #parts не найден");
+        console.error("PC FORGE: #parts не найден");
         return;
     }
 
@@ -36,25 +36,24 @@
         const text = option.textContent.trim();
         const separator = text.lastIndexOf("—");
 
-        let title = text;
-        let price = "";
-
-        if (separator !== -1) {
-            title = text.slice(0, separator).trim();
-            price = text.slice(separator + 1).trim();
-        }
-
-        return { title, price };
+        return {
+            title: separator !== -1
+                ? text.slice(0, separator).trim()
+                : text,
+            price: separator !== -1
+                ? text.slice(separator + 1).trim()
+                : "Цена неизвестна"
+        };
     }
 
     function createInterface(part) {
         if (part.dataset.cardsReady === "true") return;
 
         const select = part.querySelector("select");
-
         if (!select) return;
 
-        const name = select.dataset.name ||
+        const name =
+            select.dataset.name ||
             part.querySelector("label")?.textContent.trim() ||
             "Комплектующее";
 
@@ -63,28 +62,26 @@
         const search = document.createElement("input");
         search.className = "product-search";
         search.type = "search";
-        search.placeholder = "⌕  Поиск комплектующих...";
-        search.setAttribute("aria-label", "Поиск: " + name);
-
-        const grid = document.createElement("div");
-        grid.className = "product-grid";
+        search.placeholder = "⌕ Поиск комплектующих...";
 
         const toolbar = document.createElement("div");
         toolbar.className = "product-toolbar";
 
         const count = document.createElement("span");
-        count.className = "product-count";
-
         const selected = document.createElement("span");
         selected.className = "product-selected";
 
         toolbar.append(count, selected);
 
-        part.append(toolbar, search, grid);
+        const grid = document.createElement("div");
+        grid.className = "product-grid";
 
-        // Скрываем оригинальный select,
-        // но оставляем его для script.js.
         select.classList.add("product-native-select");
+
+        // Карточки размещаются после select.
+        select.insertAdjacentElement("afterend", toolbar);
+        toolbar.insertAdjacentElement("afterend", search);
+        search.insertAdjacentElement("afterend", grid);
 
         function renderCards() {
             const query = search.value.toLowerCase().trim();
@@ -96,9 +93,7 @@
             [...select.options].forEach(option => {
                 const data = getProductData(option);
 
-                if (!data.title.toLowerCase().includes(query)) {
-                    return;
-                }
+                if (!data.title.toLowerCase().includes(query)) return;
 
                 visible++;
 
@@ -106,12 +101,9 @@
                 card.type = "button";
                 card.className = "product-card";
 
-                const isActive =
-                    option.value === select.value;
+                const active = option.value === select.value;
 
-                if (isActive) {
-                    card.classList.add("active");
-                }
+                if (active) card.classList.add("active");
 
                 const icon = document.createElement("div");
                 icon.className = "product-icon";
@@ -119,8 +111,7 @@
 
                 const category = document.createElement("div");
                 category.className = "product-category";
-                category.textContent =
-                    descriptions[name] || "PC COMPONENT";
+                category.textContent = descriptions[name] || "PC COMPONENT";
 
                 const title = document.createElement("div");
                 title.className = "product-title";
@@ -131,11 +122,11 @@
 
                 const price = document.createElement("strong");
                 price.className = "product-price";
-                price.textContent = data.price || "Цена неизвестна";
+                price.textContent = data.price;
 
                 const badge = document.createElement("span");
                 badge.className = "product-check";
-                badge.textContent = isActive ? "✓" : "+";
+                badge.textContent = active ? "✓" : "+";
 
                 footer.append(price, badge);
                 card.append(icon, category, title, footer);
@@ -150,7 +141,7 @@
                     renderCards();
                 });
 
-                grid.appendChild(card);
+                grid.append(card);
             });
 
             count.textContent =
@@ -164,16 +155,11 @@
         }
 
         search.addEventListener("input", renderCards);
-
         select.addEventListener("change", renderCards);
 
-        // Следим за изменением списка материнских плат.
-        const observer = new MutationObserver(() => {
-            renderCards();
-        });
-
-        observer.observe(select, {
-            childList: true
+        new MutationObserver(renderCards).observe(select, {
+            childList: true,
+            subtree: true
         });
 
         renderCards();
@@ -185,13 +171,9 @@
 
     initialize();
 
-    // Повторная инициализация при появлении новых деталей.
-    const observer = new MutationObserver(() => {
-        initialize();
-    });
-
-    observer.observe(parts, {
-        childList: true
+    new MutationObserver(initialize).observe(parts, {
+        childList: true,
+        subtree: true
     });
 
 })();
