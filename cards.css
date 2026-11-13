@@ -180,7 +180,43 @@
     background: #9565ff;
     color: white;
 }
+/* FIX: карточки не перекрывают остальные блоки */
 
+.product-grid {
+    position: relative;
+    display: grid;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.product-card {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+.product-toolbar,
+.product-search {
+    position: relative;
+    z-index: 2;
+}
+
+.product-card:hover {
+    z-index: 3;
+}
+
+.result,
+.viewer {
+    position: relative;
+    z-index: 2;
+    clear: both;
+}
 @media (min-width: 1100px) {
     .product-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
