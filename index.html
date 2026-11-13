@@ -23,22 +23,16 @@
 
 <body>
 
-    <!-- HEADER -->
     <header class="header">
         <div class="logo">
             PC <span>FORGE</span>
         </div>
-
         <p>PC BUILDER / 2026</p>
     </header>
 
-    <!-- HERO -->
     <section class="hero">
         <div class="hero-content">
-
-            <div class="hero-badge">
-                PC BUILDER / 2026
-            </div>
+            <div class="hero-badge">PC BUILDER / 2026</div>
 
             <h1>
                 Твоя мощность.<br>
@@ -53,156 +47,24 @@
             <a href="#builder" class="hero-button">
                 Начать сборку ↓
             </a>
-
         </div>
     </section>
 
-    <!-- CONFIGURATOR -->
     <main class="container" id="builder">
 
         <section class="components">
-
             <div class="section-heading">
-                <div class="section-label">
-                    КОНФИГУРАТОР
-                </div>
-
+                <div class="section-label">КОНФИГУРАТОР</div>
                 <h2>Комплектующие</h2>
-
                 <p>Выбери детали для своей системы</p>
             </div>
 
-            <!-- Здесь script.js создаёт комплектующие -->
             <div id="parts"></div>
-
         </section>
 
-        <!-- 3D VIEWER -->
         <section class="viewer" id="viewer">
-
             <h2>3D-сборка компьютера</h2>
-
             <p class="description">
                 Рассмотри свой будущий компьютер
             </p>
-
-            <div id="pc3d"></div>
-
-        </section>
-
-        <!-- BUILD RESULT -->
-        <section class="result">
-
-            <h2>Твоя сборка</h2>
-
-            <div class="total">
-                Итого:
-                <span id="total">0 ₽</span>
-            </div>
-
-            <div id="summary"></div>
-
-            <button id="copy" type="button">
-                Скопировать сборку
-            </button>
-
-            <button id="reset" type="button">
-                Сбросить сборку
-            </button>
-
-        </section>
-
-    </main>
-
-    <!-- MARKET -->
-    <section class="market">
-
-        <h2>Где купить комплектующие?</h2>
-
-        <p>
-            Подбирай комплектующие и сравнивай цены.
-        </p>
-
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-
-        <p>
-            © 2026 PC FORGE. Конфигуратор компьютеров.
-        </p>
-
-    </footer>
-
-    <!-- SCRIPTS -->
-    <script src="script.js"></script>
-    <script src="cards.js"></script>
-    <script type="module" src="viewer.js"></script>
-
-</body>
-</html>
-/* PC FORGE — LAYOUT FIX */
-
-.container {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
-    align-items: start;
-    gap: 25px;
-    width: min(1400px, 94%);
-    margin: 50px auto;
-}
-
-.components {
-    grid-column: 1;
-    min-width: 0;
-    width: 100%;
-}
-
-.viewer {
-    grid-column: 2;
-    grid-row: 1;
-    position: relative;
-    min-width: 0;
-    width: 100%;
-}
-
-.result {
-    grid-column: 2;
-    grid-row: 2;
-    position: relative;
-    min-width: 0;
-    width: 100%;
-    height: fit-content;
-    margin-top: 0;
-}
-
-#parts {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-}
-
-#parts .part {
-    position: relative;
-    width: 100%;
-    min-width: 0;
-}
-
-.product-grid {
-    width: 100%;
-    min-width: 0;
-}
-
-@media (max-width: 900px) {
-    .container {
-        grid-template-columns: 1fr;
-    }
-
-    .components,
-    .viewer,
-    .result {
-        grid-column: 1;
-        grid-row: auto;
-    }
-}
+            <div
