@@ -1,495 +1,55 @@
 /* =====================================
-PC FORGE — MAIN DESIGN
+   PC FORGE — CLEAN MAIN DESIGN
 ===================================== */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  }
-
-html {
-scroll-behavior: smooth;
-}
-
-body {
-background: #090b15;
-color: #f4f5ff;
-font-family: Arial, sans-serif;
-font-size: 14px;
-line-height: 1.5;
-}
-
-/* HEADER */
-
-.header {
-min-height: 58px;
-padding: 12px 5%;
-display: flex;
-align-items: center;
-justify-content: space-between;
-border-bottom: 1px solid #252941;
-background: #0d1020;
-}
-
-.logo {
-font-size: 21px;
-font-weight: 900;
-}
-
-.logo span {
-color: #8c6cff;
-}
-
-.header-label {
-color: #9299b5;
-font-size: 11px;
-letter-spacing: 2px;
-}
-
-/* HERO */
-
-.hero {
-padding: 28px 6% 24px;
-background: radial-gradient(ellipse at 80% 30%, #292052, transparent 60%);
-}
-
-.badge {
-color: #42e3cf;
-letter-spacing: 2px;
-font-size: 11px;
-font-weight: bold;
-}
-
-.hero h1 {
-font-size: clamp(28px, 4vw, 42px);
-line-height: 1.15;
-margin: 10px 0;
-}
-
-.hero h1 span {
-color: #9a7aff;
-}
-
-.hero p {
-color: #a4abc4;
-max-width: 450px;
-font-size: 14px;
-}
-
-/* MAIN CONTAINER */
-
-.container {
-display: grid;
-grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.9fr);
-gap: 18px;
-max-width: 1250px;
-margin: 0 auto;
-padding: 18px 5%;
-align-items: start;
-}
-
-.components,
-.result {
-background: #141829;
-border: 1px solid #292f49;
-border-radius: 14px;
-padding: 18px;
-}
-
-h2 {
-font-size: 20px;
-margin-bottom: 5px;
-}
-
-.description {
-color: #9299b5;
-font-size: 13px;
-margin-bottom: 18px;
-}
-
-/* COMPONENTS */
-
-.part {
-margin-bottom: 12px;
-}
-
-.part label {
-display: block;
-margin-bottom: 5px;
-color: #bfc5dc;
-font-size: 13px;
-font-weight: 600;
-}
-
-select {
-width: 100%;
-min-height: 42px;
-padding: 9px 11px;
-background: #20263b;
-border: 1px solid #343c59;
-border-radius: 8px;
-color: white;
-font-size: 13px;
-outline: none;
-}
-
-select:focus {
-border-color: #8c6cff;
-}
-
-/* PRICE */
-
-.price-label {
-color: #9299b5;
-font-size: 10px;
-letter-spacing: 1.5px;
-margin-top: 15px;
-}
-
-.total {
-font-size: clamp(25px, 3vw, 32px);
-font-weight: bold;
-color: #55e5d0;
-margin: 5px 0 16px;
-overflow-wrap: anywhere;
-}
-
-.summary-item {
-display: flex;
-justify-content: space-between;
-gap: 10px;
-padding: 9px 0;
-border-bottom: 1px solid #292f49;
-font-size: 12px;
-}
-
-/* BUTTONS */
-
-button {
-width: 100%;
-min-height: 42px;
-padding: 10px;
-margin-top: 10px;
-border: none;
-border-radius: 8px;
-background: linear-gradient(100deg, #8b6aff, #5d8bff);
-color: white;
-font-weight: bold;
-font-size: 13px;
-cursor: pointer;
-transition: 0.2s;
-}
-
-button:hover {
-filter: brightness(1.15);
-transform: translateY(-1px);
-}
-
-button:active {
-transform: scale(0.98);
-}
-
-button.reset {
-background: #252c43;
-}
-
-/* MARKET */
-
-.market {
-margin-top: 20px;
-}
-
-.market h3 {
-font-size: 15px;
-margin-bottom: 8px;
-}
-
-.market div {
-display: flex;
-justify-content: space-between;
-gap: 10px;
-padding: 9px 0;
-color: #b8bfd5;
-border-bottom: 1px solid #292f49;
-font-size: 12px;
-}
-
-.market span {
-color: #55e5d0;
-}
-
-/* FOOTER */
-
-footer {
-text-align: center;
-padding: 20px 12px;
-color: #747d9c;
-font-size: 11px;
-}
-
-/* =====================================
-PC FORGE — EXTRA TOOLS
-===================================== */
-
-.forge-tools {
-margin-top: 25px;
-padding: 22px;
-border: 1px solid rgba(0, 220, 255, 0.2);
-border-radius: 18px;
-background: linear-gradient(145deg, #151d35, #10172b);
-box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-.forge-tools h2 {
-margin-bottom: 15px;
-color: #fff;
-}
-
-.forge-tools p {
-color: #aab6d3;
-font-size: 14px;
-}
-
-.forge-buttons {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 10px;
-margin-top: 15px;
-}
-
-.forge-tools button {
-padding: 12px;
-border: 1px solid rgba(0, 220, 255, 0.25);
-border-radius: 10px;
-background: #202d4b;
-color: #fff;
-font-size: 14px;
-cursor: pointer;
-transition: 0.2s;
-}
-
-.forge-tools button:hover {
-background: #00bcd4;
-color: #07111f;
-transform: translateY(-2px);
-}
-
-.forge-tools button:active {
-transform: scale(0.97);
-}
-
-.forge-info {
-margin-top: 15px;
-padding: 14px;
-border-radius: 10px;
-background: rgba(0, 220, 255, 0.07);
-color: #dceaff;
-line-height: 1.6;
-}
-
-.forge-info strong {
-color: #00e5ff;
-}
-
-.forge-select {
-width: 100%;
-margin-top: 10px;
-padding: 12px;
-border: 1px solid #34466b;
-border-radius: 10px;
-background: #111a30;
-color: #fff;
-}
-
-.forge-status {
-margin-top: 12px;
-padding: 12px;
-border-radius: 10px;
-font-size: 14px;
-background: #192b3b;
-color: #7eeaff;
-}
-
-/* =====================================
-3D PC BUILDER
-===================================== */
-
-.viewer {
-grid-column: 1 / -1;
-background: #141829;
-border: 1px solid rgba(130, 60, 255, 0.3);
-border-radius: 18px;
-padding: 24px;
-min-width: 0;
-margin-top: 5px;
-}
-
-#pc3d {
-width: 100%;
-height: 450px;
-overflow: hidden;
-border-radius: 14px;
-background: #101525;
-border: 1px solid #292f49;
-}
-
-#pc3d canvas {
-display: block;
-width: 100%;
-height: 100%;
-}
-
-/* =====================================
-TABLETS
-===================================== */
-
-@media (max-width: 850px) {
-.container {
-grid-template-columns: 1fr;
-max-width: 650px;
-}
-
-.components {
-    order: 1;
-}
-
-.result {
-    order: 2;
-}
-
-.viewer {
-    order: 3;
-    grid-column: 1;
-}
-
-#pc3d {
-    height: 350px;
-}
-
-}
-
-/* =====================================
-PHONES
-===================================== */
-
-@media (max-width: 600px) {
-.forge-tools {
-padding: 16px;
-}
-
-.forge-buttons {
-    grid-template-columns: 1fr;
-}
-
-.forge-tools button {
-    width: 100%;
-}
-
-}
-
-/* =====================================
-SMALL PHONES
-===================================== */
-
-@media (max-width: 480px) {
-body {
-font-size: 13px;
-}
-
-.header {
-    padding: 10px 16px;
-    min-height: 52px;
-}
-
-.logo {
-    font-size: 19px;
-}
-
-.header-label {
-    font-size: 9px;
-    letter-spacing: 1px;
-}
-
-.hero {
-    padding: 22px 18px 18px;
-}
-
-.hero h1 {
-    font-size: 29px;
-    margin: 8px 0;
-}
-
-.hero p {
-    font-size: 13px;
-}
-
-.container {
-    padding: 12px;
-    gap: 12px;
-}
-
-.components,
-.result,
-.viewer {
-    padding: 14px;
-    border-radius: 11px;
-}
-
-h2 {
-    font-size: 18px;
-}
-
-select {
-    min-height: 40px;
-    font-size: 12px;
-}
-
-.total {
-    font-size: 27px;
-}
-
-#pc3d {
-    height: 300px;
-}
-
-}
-/* ========================================
-   PC FORGE — REDESIGN 2026
-======================================== */
 
 :root {
-    --bg: #080b14;
-    --panel: #101727;
-    --panel-light: #172238;
-    --accent: #8b5cf6;
-    --accent-2: #06b6d4;
+    --bg: #090d18;
+    --panel: #131b2d;
+    --panel-light: #1b2740;
+    --accent: #8b6cff;
+    --cyan: #43dfd0;
     --text: #f4f6ff;
-    --muted: #929db3;
-    --border: rgba(255,255,255,0.08);
+    --muted: #9ba7c2;
+    --border: rgba(255,255,255,0.09);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
+    min-height: 100vh;
     background:
-        radial-gradient(ellipse at 15% 0%, rgba(91,60,180,.18), transparent 40%),
-        radial-gradient(ellipse at 90% 20%, rgba(0,170,220,.10), transparent 35%),
+        radial-gradient(ellipse at 15% 0%, rgba(139,108,255,.14), transparent 40%),
         var(--bg);
     color: var(--text);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 /* HEADER */
 
 .header {
-    background: rgba(10,14,25,.85);
+    min-height: 70px;
+    padding: 14px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13,18,32,.95);
     border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(18px);
-    padding: 22px 6%;
 }
 
 .logo {
-    font-size: 28px;
+    font-size: 25px;
     font-weight: 900;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .logo span {
@@ -498,272 +58,64 @@ body {
 
 .header p {
     color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
 }
 
 /* HERO */
 
 .hero {
-    padding: 75px 20px;
-    text-align: center;
+    padding: 65px 20px;
+    background:
+        radial-gradient(ellipse at 80% 40%, rgba(92,65,180,.2), transparent 55%);
+}
+
+.hero-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.hero-badge {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 3px;
 }
 
 .hero h1 {
-    font-size: clamp(32px, 5vw, 58px);
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1.12;
     font-weight: 900;
-    background: linear-gradient(100deg, #fff, #a78bfa, #22d3ee);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    margin-bottom: 18px;
+}
+
+.hero h1 span {
+    color: var(--accent);
 }
 
 .hero p {
+    max-width: 480px;
     color: var(--muted);
     font-size: 16px;
+    margin-bottom: 25px;
 }
 
-/* MAIN LAYOUT */
-
-.container {
-    gap: 24px;
-    max-width: 1450px;
-}
-
-.components,
-.result,
-.viewer {
-    background: rgba(16,23,39,.88);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 25px;
-    box-shadow: 0 15px 45px rgba(0,0,0,.22);
-}
-
-.container h2 {
-    font-size: 23px;
-    margin-bottom: 22px;
-}
-
-/* COMPONENT BLOCKS */
-
-.part {
-    background: linear-gradient(
-        145deg,
-        rgba(29,42,66,.9),
-        rgba(16,24,40,.95)
-    );
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 17px;
-    margin-bottom: 14px;
-    transition: .25s ease;
-}
-
-.part:hover {
-    border-color: rgba(139,92,246,.55);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,.2);
-}
-
-.part label {
-    display: block;
-    color: #c4b5fd;
-    font-size: 15px;
-    font-weight: 750;
-    margin-bottom: 11px;
-}
-
-.part select {
-    width: 100%;
-    min-height: 48px;
-    padding: 12px 14px;
+.hero-button {
+    display: inline-block;
+    padding: 13px 22px;
+    border-radius: 10px;
+    background: linear-gradient(110deg, #8b6cff, #536dff);
     color: white;
-    background: #0b1220;
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 11px;
-    outline: none;
-    cursor: pointer;
-    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
     transition: .2s;
 }
 
-.part select:hover,
-.part select:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(139,92,246,.12);
-}
-
-.part select option {
-    background: #101727;
-    color: white;
-}
-
-/* COMPATIBILITY */
-
-.compatibility {
-    padding: 15px;
-    border-radius: 12px;
-    margin-top: 15px;
-    font-weight: 700;
-}
-
-.compatibility.good {
-    background: rgba(34,197,94,.1);
-    border: 1px solid rgba(34,197,94,.3);
-    color: #4ade80;
-}
-
-.compatibility.bad {
-    background: rgba(239,68,68,.1);
-    border: 1px solid rgba(239,68,68,.3);
-    color: #f87171;
-}
-
-/* TOTAL */
-
-.total {
-    background: linear-gradient(110deg, #6d42d8, #2563eb);
-    padding: 20px;
-    border-radius: 15px;
-    font-size: 18px;
-    font-weight: 700;
-    box-shadow: 0 8px 25px rgba(109,66,216,.2);
-}
-
-#total {
-    font-size: 25px;
-    font-weight: 900;
-}
-
-/* SUMMARY */
-
-.summary-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 13px 0;
-    border-bottom: 1px solid var(--border);
-    color: #cbd5e1;
-    font-size: 13px;
-}
-
-.summary-item strong {
-    color: white;
-    white-space: nowrap;
-}
-
-/* BUTTONS */
-
-button {
-    border: none;
-    border-radius: 11px;
-    padding: 13px 18px;
-    background: linear-gradient(110deg, #8055ed, #5369ed);
-    color: white;
-    font-weight: 750;
-    cursor: pointer;
-    transition: .2s ease;
-}
-
-button:hover {
+.hero-button:hover {
     transform: translateY(-2px);
     filter: brightness(1.15);
-    box-shadow: 0 7px 22px rgba(109,66,216,.3);
-}
-
-button:active {
-    transform: scale(.97);
-}
-
-#reset {
-    background: #273449;
-}
-
-/* SMART TOOLS */
-
-.forge-tools {
-    margin-top: 28px;
-    padding: 22px;
-    background: linear-gradient(145deg, #151e34, #101625);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-}
-
-.forge-tools h2 {
-    color: #c4b5fd;
-}
-
-.forge-tools p,
-.forge-info,
-.forge-status {
-    color: var(--muted);
-    line-height: 1.6;
-}
-
-.forge-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
-    gap: 10px;
-}
-
-.forge-info,
-.forge-status {
-    padding: 14px;
-    margin-top: 15px;
-    background: rgba(0,0,0,.2);
-    border-radius: 11px;
-}
-
-/* 3D VIEWER */
-
-#pc3d {
-    border-radius: 15px;
-    overflow: hidden;
-    background: radial-gradient(circle, #202d49, #080d18);
-    border: 1px solid var(--border);
-}
-
-/* MARKET */
-
-.market {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 35px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-}
-
-/* FOOTER */
-
-.footer {
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-    padding: 25px;
-}
-
-/* MOBILE */
-
-@media(max-width: 768px) {
-    .hero {
-        padding: 45px 18px;
-    }
-
-    .components,
-    .result,
-    .viewer {
-        padding: 17px;
-        border-radius: 16px;
-    }
-
-    .forge-buttons {
-        grid-template-columns: 1fr;
-    }
-
-    .summary-item {
-        font-size: 12px;
-    }
-}
 }
 
 /* MAIN LAYOUT */
@@ -774,10 +126,10 @@ button:active {
     grid-template-areas:
         "components result"
         "viewer viewer";
-    gap: 24px;
-    max-width: 1450px;
+    gap: 22px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 35px 25px;
+    padding: 25px;
     align-items: start;
 }
 
@@ -797,150 +149,334 @@ button:active {
 .result,
 .viewer {
     min-width: 0;
-    padding: 27px;
-    background: rgba(17,24,39,.88);
+    padding: 25px;
+    background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    box-shadow: 0 15px 45px rgba(0,0,0,.2);
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0,0,0,.18);
 }
 
+/* SECTION HEADINGS */
+
 .section-heading {
-    margin-bottom: 28px;
+    margin-bottom: 25px;
 }
 
 .section-label {
     color: var(--cyan);
     font-size: 11px;
-    font-weight: 800;
+    font-weight: bold;
     letter-spacing: 3px;
-    margin-bottom: 9px;
+    margin-bottom: 8px;
 }
 
-.section-heading h2,
-.viewer h2,
-.result h2 {
-    font-size: 27px;
+h2 {
+    font-size: 23px;
     margin-bottom: 8px;
 }
 
 .section-heading p,
-.viewer p {
+.description {
     color: var(--muted);
+    font-size: 13px;
 }
 
 /* COMPONENTS */
 
 .part {
-    padding: 18px;
-    margin-bottom: 15px;
+    padding: 17px;
+    margin-bottom: 14px;
+    background: linear-gradient(145deg, #1b2740, #141d30);
     border: 1px solid var(--border);
-    border-radius: 15px;
-    background: linear-gradient(145deg, #19253b, #111827);
-    transition: .25s;
+    border-radius: 13px;
+    transition: .2s;
 }
 
 .part:hover {
-    border-color: rgba(149,101,255,.6);
-    transform: translateY(-2px);
+    border-color: rgba(139,108,255,.55);
 }
 
 .part label {
     display: block;
-    margin-bottom: 12px;
-    color: #c8b5ff;
-    font-size: 15px;
-    font-weight: 800;
+    margin-bottom: 10px;
+    color: #c9c0ff;
+    font-size: 14px;
+    font-weight: bold;
 }
 
-.part select {
+select {
     width: 100%;
-    min-height: 48px;
-    padding: 12px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: #0b1220;
+    min-height: 45px;
+    padding: 11px 13px;
+    background: #0c1424;
+    border: 1px solid #34415d;
+    border-radius: 9px;
     color: white;
-    font-size: 14px;
+    font-size: 13px;
     outline: none;
 }
 
-.part select:focus {
-    border-color: var(--purple);
-    box-shadow: 0 0 0 3px rgba(149,101,255,.12);
+select:focus {
+    border-color: var(--accent);
 }
 
-.part select option {
-    background: #111827;
+select option {
+    background: #131b2d;
     color: white;
+}
+
+/* RESULT */
+
+.price-label {
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.total {
+    margin: 10px 0 18px;
+    padding: 17px;
+    border-radius: 12px;
+    background: linear-gradient(110deg, #6845c9, #315ed0);
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+.summary-item strong {
+    color: white;
+}
+
+/* BUTTONS */
+
+button {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(110deg, #805cf0, #536dff);
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+button:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: scale(.98);
+}
+
+button.reset,
+#reset {
+    background: #29344c;
 }
 
 /* COMPATIBILITY */
 
 .compatibility {
-    padding: 16px;
-    margin-top: 18px;
-    border-radius: 12px;
-    font-weight: 700;
+    padding: 14px;
+    margin-top: 15px;
+    border-radius: 10px;
+    font-weight: bold;
 }
 
 .compatibility.good {
     color: #4ade80;
-    background: rgba(34,197,94,.09);
+    background: rgba(34,197,94,.1);
     border: 1px solid rgba(34,197,94,.3);
 }
 
 .compatibility.bad {
     color: #fb7185;
-    background: rgba(239,68,68,.09);
+    background: rgba(239,68,68,.1);
     border: 1px solid rgba(239,68,68,.3);
 }
 
 /* SMART TOOLS */
 
 .forge-tools {
-    padding: 22px;
-    margin-top: 28px;
-    border: 1px solid rgba(149,101,255,.25);
-    border-radius: 17px;
-    background: linear-gradient(145deg, #19213a, #101827);
+    margin-top: 25px;
+    padding: 20px;
+    background: var(--panel-light);
+    border: 1px solid var(--border);
+    border-radius: 15px;
 }
 
 .forge-tools h2 {
-    color: #c4b5fd;
+    color: #c9c0ff;
 }
 
-.forge-tools p {
+.forge-tools p,
+.forge-info,
+.forge-status {
     color: var(--muted);
+    line-height: 1.6;
 }
 
 .forge-buttons {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
-    margin-top: 18px;
+    margin-top: 15px;
 }
 
 .forge-tools button {
-    min-height: 48px;
-    padding: 12px;
-    border: 1px solid rgba(149,101,255,.2);
-    border-radius: 10px;
-    background: #202c48;
-    color: white;
-    font-weight: 750;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.forge-tools button:hover {
-    background: var(--purple);
-    transform: translateY(-2px);
+    background: #293653;
+    border: 1px solid var(--border);
 }
 
 .forge-info,
 .forge-status {
-    padding: 14px;
-    margin-top: 15px;
-    border-radius: 10px;
+    padding: 13px;
+    margin-top: 14px;
     background: rgba(0,0,0,.2);
-    color: var(--mut
+    border-radius: 10px;
+}
+
+/* MARKET */
+
+.market {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 25px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.market h3 {
+    margin-bottom: 12px;
+}
+
+.market div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+}
+
+.market span {
+    color: var(--cyan);
+}
+
+/* 3D VIEWER */
+
+#pc3d {
+    width: 100%;
+    height: 450px;
+    margin-top: 15px;
+    overflow: hidden;
+    border-radius: 13px;
+    background: radial-gradient(circle, #202d49, #080d18);
+    border: 1px solid var(--border);
+}
+
+#pc3d canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 25px 15px;
+    text-align: center;
+    color: #7f8ba8;
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+}
+
+/* TABLETS */
+
+@media (max-width: 850px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "components"
+            "result"
+            "viewer";
+        max-width: 680px;
+    }
+
+    #pc3d {
+        height: 350px;
+    }
+}
+
+/* PHONES */
+
+@media (max-width: 600px) {
+    .header {
+        padding: 12px 18px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .header p {
+        font-size: 9px;
+    }
+
+    .hero {
+        padding: 40px 20px;
+    }
+
+    .hero h1 {
+        font-size: 35px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 13px;
+        gap: 13px;
+    }
+
+    .components,
+    .result,
+    .viewer {
+        padding: 16px;
+        border-radius: 13px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .forge-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    #pc3d {
+        height: 290px;
+    }
+
+    .summary-item {
+        font-size: 12px;
+    }
+}
