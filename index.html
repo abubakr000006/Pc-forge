@@ -1,228 +1,141 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090910">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b12">
 
-  <title>PC FORGE — Конфигуратор ПК</title>
-  <meta name="description" content="Собери свой идеальный компьютер с PC FORGE. Подбор комплектующих, проверка совместимости и 3D-просмотр.">
+    <title>PC FORGE — PC Builder 2026</title>
+    <meta name="description" content="PC FORGE — конфигуратор компьютеров. Подбирай комплектующие, проверяй совместимость и собирай компьютер мечты.">
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="cards.css">
+    <link rel="stylesheet" href="style.css">
 
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.170.0/build/three.module.js"
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
     }
-  }
-  </script>
+    </script>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container header-inner">
-      <a href="#" class="logo">
-        <span class="logo-icon">◈</span>
-        PC <span>FORGE</span>
-      </a>
-
-      <nav class="nav">
-        <a href="#builder">Конфигуратор</a>
-        <a href="#viewer">3D-сборка</a>
-        <a href="#about">О проекте</a>
-      </nav>
-
-      <a href="#builder" class="header-button">Собрать ПК</a>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container hero-content">
-      <div class="hero-badge">
-        <span></span>
-        PC CONFIGURATOR
-      </div>
-
-      <h1>
-        СОЗДАЙ СВОЙ<br>
-        <span>ИДЕАЛЬНЫЙ ПК</span>
-      </h1>
-
-      <p>
-        Подбирай комплектующие, проверяй совместимость
-        и создавай собственную сборку.
-      </p>
-
-      <a href="#builder" class="hero-button">
-        Начать сборку →
-      </a>
-    </div>
-  </section>
-
-  <!-- BUILDER -->
-  <main class="container" id="builder">
-
-    <div class="section-heading">
-      <div>
-        <div class="section-label">BUILD YOUR PC</div>
-        <h2>Конфигуратор</h2>
-        <p>Выбирай комплектующие для своей будущей системы.</p>
-      </div>
-
-      <div class="builder-chip">
-        <span class="status-dot"></span>
-        Сборка онлайн
-      </div>
-    </div>
-
-    <!-- SMART TOOLS -->
-    <section class="forge-tools">
-
-      <div class="forge-tools-heading">
-        <div>
-          <span class="section-label">SMART TOOLS</span>
-          <h3>Умная сборка</h3>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            PC <span>FORGE</span>
         </div>
-        <span id="forge-status">Готов к работе</span>
-      </div>
 
-      <div class="forge-presets">
-        <button id="preset-budget" type="button">
-          Бюджетная сборка
-        </button>
+        <p>PC BUILDER / 2026</p>
+    </header>
 
-        <button id="preset-gaming" type="button">
-          Игровая сборка
-        </button>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
 
-        <button id="preset-max" type="button">
-          Максимальная сборка
-        </button>
-      </div>
+            <div class="hero-badge">
+                PC BUILDER / 2026
+            </div>
 
-      <div class="forge-actions">
-        <button id="random-build" type="button">
-          🎲 Случайная сборка
-        </button>
+            <h1>
+                Твоя мощность.<br>
+                <span>Твои правила.</span>
+            </h1>
 
-        <button id="save-build" type="button">
-          💾 Сохранить
-        </button>
+            <p>
+                Подбирай комплектующие, проверяй совместимость
+                и собирай компьютер мечты.
+            </p>
 
-        <button id="load-build" type="button">
-          📂 Загрузить
-        </button>
-      </div>
+            <a href="#builder" class="hero-button">
+                Начать сборку ↓
+            </a>
 
-      <div id="forge-info"></div>
+        </div>
+    </section>
+
+    <!-- CONFIGURATOR -->
+    <main class="container" id="builder">
+
+        <section class="components">
+
+            <div class="section-heading">
+                <div class="section-label">
+                    КОНФИГУРАТОР
+                </div>
+
+                <h2>Комплектующие</h2>
+
+                <p>Выбери детали для своей системы</p>
+            </div>
+
+            <!-- Здесь script.js создаёт комплектующие -->
+            <div id="parts"></div>
+
+        </section>
+
+        <!-- 3D VIEWER -->
+        <section class="viewer" id="viewer">
+
+            <h2>3D-сборка компьютера</h2>
+
+            <p class="description">
+                Рассмотри свой будущий компьютер
+            </p>
+
+            <div id="pc3d"></div>
+
+        </section>
+
+        <!-- BUILD RESULT -->
+        <section class="result">
+
+            <h2>Твоя сборка</h2>
+
+            <div class="total">
+                Итого:
+                <span id="total">0 ₽</span>
+            </div>
+
+            <div id="summary"></div>
+
+            <button id="copy" type="button">
+                Скопировать сборку
+            </button>
+
+            <button id="reset" type="button">
+                Сбросить сборку
+            </button>
+
+        </section>
+
+    </main>
+
+    <!-- MARKET -->
+    <section class="market">
+
+        <h2>Где купить комплектующие?</h2>
+
+        <p>
+            Подбирай комплектующие и сравнивай цены.
+        </p>
 
     </section>
 
-    <!-- COMPONENTS -->
-    <div class="builder-layout">
+    <!-- FOOTER -->
+    <footer class="footer">
 
-      <section class="components">
+        <p>
+            © 2026 PC FORGE. Конфигуратор компьютеров.
+        </p>
 
-        <div class="components-heading">
-          <h3>Комплектующие</h3>
-          <span>Выбери необходимые детали</span>
-        </div>
+    </footer>
 
-        <div id="parts"></div>
-
-      </section>
-
-      <!-- RESULT -->
-      <aside class="result">
-
-        <div class="result-heading">
-          <span class="section-label">YOUR BUILD</span>
-          <h3>Твоя сборка</h3>
-        </div>
-
-        <div class="total-box">
-          <span>Общая стоимость</span>
-          <div id="total">0 ₽</div>
-        </div>
-
-        <div class="summary-heading">
-          <h4>Выбранные компоненты</h4>
-        </div>
-
-        <div id="summary">
-          <p>Пока ничего не выбрано</p>
-        </div>
-
-        <div class="result-actions">
-          <button id="copy" type="button">
-            Копировать сборку
-          </button>
-
-          <button id="reset" type="button">
-            Сбросить
-          </button>
-        </div>
-
-      </aside>
-
-    </div>
-
-  </main>
-
-  <!-- 3D VIEWER -->
-  <section class="viewer-section" id="viewer">
-
-    <div class="container">
-
-      <div class="section-heading">
-        <div>
-          <div class="section-label">3D VISUALIZATION</div>
-          <h2>Твоя сборка в 3D</h2>
-          <p>Посмотри на свой компьютер в объёме.</p>
-        </div>
-      </div>
-
-      <div class="viewer">
-        <div id="pc3d"></div>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="container">
-      <div class="section-label">ABOUT PC FORGE</div>
-      <h2>Собирай. Проверяй. Создавай.</h2>
-      <p>
-        PC FORGE — конфигуратор компьютеров,
-        который помогает подобрать комплектующие
-        и создать собственную сборку.
-      </p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <a href="#" class="logo">
-        ◈ PC <span>FORGE</span>
-      </a>
-
-      <p>© 2026 PC FORGE. Все права защищены.</p>
-    </div>
-  </footer>
-
-  <!-- SCRIPTS -->
-  <script src="script.js"></script>
-  <script src="cards.js"></script>
-  <script type="module" src="viewer.js"></script>
+    <!-- SCRIPTS -->
+    <script src="script.js"></script>
+    <script type="module" src="viewer.js"></script>
 
 </body>
 </html>
