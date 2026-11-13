@@ -123,4 +123,212 @@ if (!container) {
             emissive: color,
             emissiveIntensity: 1.5
         });
-   
+    }
+
+    // КОРПУС
+    box(2.8, 0.12, 2.3, 0, 0.1, 0, materials.metal);
+    box(2.8, 0.12, 2.3, 0, 3.8, 0, materials.metal);
+
+    // ЗАДНЯЯ СТЕНКА
+    box(2.8, 3.8, 0.12, 0, 1.95, -1.1, materials.black);
+
+    // ЛЕВАЯ СТЕНКА
+    box(0.12, 3.8, 2.3, -1.34, 1.95, 0, materials.black);
+
+    // ПЕРЕДНЯЯ РАМКА
+    box(0.12, 3.8, 2.3, 1.34, 1.95, 0, materials.metal);
+
+    // СТЕКЛО
+    const glassPanel = new THREE.Mesh(
+        new THREE.BoxGeometry(2.55, 3.5, 0.025),
+        materials.glass
+    );
+
+    glassPanel.position.set(0, 1.95, 1.16);
+    pc.add(glassPanel);
+
+    // МАТЕРИНСКАЯ ПЛАТА
+    box(
+        1.8, 2.5, 0.08,
+        -0.35, 2.05, -0.85,
+        materials.board
+    );
+
+    // ПРОЦЕССОР
+    box(
+        0.55, 0.12, 0.55,
+        -0.35, 2.85, -0.55,
+        materials.silver
+    );
+
+    // КУЛЕР
+    box(
+        0.85, 0.4, 0.85,
+        -0.35, 3.15, -0.55,
+        materials.metal
+    );
+
+    // СОЗДАНИЕ RGB-ВЕНТИЛЯТОРА
+    function fan(x, y, z, color, radius = 0.38) {
+
+        const group = new THREE.Group();
+
+        group.position.set(x, y, z);
+
+        const ring = new THREE.Mesh(
+            new THREE.TorusGeometry(
+                radius,
+                0.045,
+                12,
+                40
+            ),
+            rgbMaterial(color)
+        );
+
+        group.add(ring);
+
+        const center = new THREE.Mesh(
+            new THREE.CylinderGeometry(
+                radius * 0.3,
+                radius * 0.3,
+                0.12,
+                24
+            ),
+            materials.black
+        );
+
+        center.rotation.x = Math.PI / 2;
+
+        group.add(center);
+
+        // Лопасти
+        for (let i = 0; i < 4; i++) {
+
+            const blade = new THREE.Mesh(
+                new THREE.BoxGeometry(
+                    radius * 0.65,
+                    0.055,
+                    0.045
+                ),
+                materials.silver
+            );
+
+            blade.position.x = radius * 0.35;
+            blade.rotation.z = i * Math.PI / 2;
+
+            group.add(blade);
+        }
+
+        pc.add(group);
+
+        return group;
+    }
+
+    // ВЕНТИЛЯТОР КУЛЕРА
+    fan(-0.35, 3.15, 0.0, 0x00aaff, 0.32);
+
+    // ОПЕРАТИВНАЯ ПАМЯТЬ
+    for (let i = 0; i < 2; i++) {
+
+        box(
+            0.12, 0.85, 0.18,
+            0.25 + i * 0.3,
+            2.75,
+            -0.55,
+            materials.silver
+        );
+
+        box(
+            0.13, 0.04, 0.19,
+            0.25 + i * 0.3,
+            3.2,
+            -0.55,
+            rgbMaterial(0x8a35ff)
+        );
+    }
+
+    // ВИДЕОКАРТА
+    box(
+        2.0, 0.38, 0.65,
+        0, 1.65, 0.15,
+        materials.black
+    );
+
+    // ПОЛОСА ВИДЕОКАРТЫ
+    box(
+        1.7, 0.045, 0.035,
+        0, 1.85, 0.49,
+        rgbMaterial(0x0088ff)
+    );
+
+    // ВЕНТИЛЯТОРЫ ВИДЕОКАРТЫ
+    for (let i = 0; i < 3; i++) {
+
+        fan(
+            -0.65 + i * 0.65,
+            1.65,
+            0.53,
+            0x00aaff,
+            0.18
+        );
+    }
+
+    // ПЕРЕДНИЕ ВЕНТИЛЯТОРЫ
+    for (let i = 0; i < 3; i++) {
+
+        fan(
+            0.85,
+            0.8 + i * 1.1,
+            0.75,
+            0x8a35ff
+        );
+    }
+
+    // БЛОК ПИТАНИЯ
+    box(
+        1.0, 0.65, 1.0,
+        0.55, 0.55, -0.45,
+        materials.black
+    );
+
+    // ПОЛ
+    const floor = new THREE.Mesh(
+        new THREE.PlaneGeometry(200, 200),
+        new THREE.MeshStandardMaterial({
+            color: 0x101525,
+            roughness: 0.9
+        })
+    );
+
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = 0;
+    scene.add(floor);
+
+    // АНИМАЦИЯ
+    function animate() {
+
+        requestAnimationFrame(animate);
+
+        controls.update();
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // ИЗМЕНЕНИЕ РАЗМЕРА
+    const resizeObserver = new ResizeObserver(() => {
+
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        if (width === 0 || height === 0) return;
+
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(width, height);
+    });
+
+    resizeObserver.observe(container);
+}
