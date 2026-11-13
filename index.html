@@ -1,70 +1,52 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!DOCTYPE html><html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0b0b12">
+    <title>PC FORGE — PC Builder</title>
+    <meta name="description" content="PC FORGE — конфигуратор компьютеров."><link rel="stylesheet" href="style.css">
 
-    <title>PC FORGE — PC Builder 2026</title>
-    <meta name="description" content="PC FORGE — конфигуратор компьютеров. Подбирай комплектующие, проверяй совместимость и собирай компьютер мечты.">
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="cards.css">
-
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
-        }
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
     }
-    </script>
+}
+</script>
+
 </head>
+<body><header class="header">
+    <div class="logo">PC <span>FORGE</span></div>
+    <p>PC BUILDER</p>
+</header><section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">PC BUILDER</div>
+        <h1>Твоя мощность.<br><span>Твои правила.</span></h1>
+        <p>Подбирай комплектующие, проверяй совместимость и собирай компьютер мечты.</p>
+        <a href="#builder" class="hero-button">Начать сборку ↓</a>
+    </div>
+</section><main class="container" id="builder"><section class="components">
+    <div class="section-heading">
+        <div class="section-label">КОНФИГУРАТОР</div>
+        <h2>Комплектующие</h2>
+        <p>Выбери детали для своей системы</p>
+    </div>
 
-<body>
+    <div id="parts"></div>
+    <div id="compatibility"></div>
+    <div id="summary"></div>
+    <div id="total"></div>
 
-    <header class="header">
-        <div class="logo">
-            PC <span>FORGE</span>
-        </div>
-        <p>PC BUILDER / 2026</p>
-    </header>
+    <button id="reset" type="button">Сбросить сборку</button>
+    <button id="copy" type="button">Скопировать сборку</button>
+</section>
 
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">PC BUILDER / 2026</div>
+<section class="viewer" id="viewer">
+    <h2>3D-сборка компьютера</h2>
+    <p class="description">Рассмотри свой будущий компьютер</p>
+    <div id="pc3d" style="width:100%;height:500px;"></div>
+</section>
 
-            <h1>
-                Твоя мощность.<br>
-                <span>Твои правила.</span>
-            </h1>
-
-            <p>
-                Подбирай комплектующие, проверяй совместимость
-                и собирай компьютер мечты.
-            </p>
-
-            <a href="#builder" class="hero-button">
-                Начать сборку ↓
-            </a>
-        </div>
-    </section>
-
-    <main class="container" id="builder">
-
-        <section class="components">
-            <div class="section-heading">
-                <div class="section-label">КОНФИГУРАТОР</div>
-                <h2>Комплектующие</h2>
-                <p>Выбери детали для своей системы</p>
-            </div>
-
-            <div id="parts"></div>
-        </section>
-
-        <section class="viewer" id="viewer">
-            <h2>3D-сборка компьютера</h2>
-            <p class="description">
-                Рассмотри свой будущий компьютер
-            </p>
-            <div
+</main><script src="script.js"></script><script type="module" src="viewer.js"></script></body>
+</html>
